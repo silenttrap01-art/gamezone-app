@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameZone</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, sans-serif; background: #0f0f1a; color: #e0e0ff; min-height: 100vh; }
+
+  /* ЭКРАНЫ */
+  .screen { display: none; padding: 16px; }
+  .screen.active { display: block; }
+
+  /* ХЕДЕР */
+  .header { display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #1a1a2e; border-bottom: 1px solid #2a2a4a; }
+  .header h1 { font-size: 18px; font-weight: 600; }
+  .stars-badge { background: #2a2a4a; border-radius: 20px; padding: 6px 12px; font-size: 13px; color: #ffd700; }
+
+  /* ГЛАВНАЯ */
+  .section-title { font-size: 11px; color: #6666aa; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 10px; }
+  .games-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .game-card { background: #1a1a2e; border-radius: 16px; padding: 16px; border: 1px solid #2a2a4a; cursor: pointer; transition: border-color 0.2s; }
+  .game-card:hover { border-color: #5b5ef4; }
+  .game-icon { font-size: 28px; margin-bottom: 8px; }
+  .game-name { font-size: 13px; font-weight: 500; }
+  .game-desc { font-size: 11px; color: #6666aa; margin-top: 3px; }
+
+  /* ЛИДЕРБОРД */
+  .lb-card { background: #1a1a2e; border-radius: 14px; padding: 12px; margin-top: 8px; }
+  .lb-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #2a2a3a; }
+  .lb-row:last-child { border-bottom: none; }
+  .lb-rank { font-size: 13px; font-weight: 600; color: #5b5ef4; width: 20px; }
+  .lb-rank.gold { color: #ffd700; }
+  .lb-rank.silver { color: #aaaacc; }
+  .lb-rank.bronze { color: #cd7f32; }
+  .lb-name { flex: 1; font-size: 13px; }
+  .lb-stars { font-size: 12px; color: #ffd700; }
+
+  /* ЭКРАН ИГРЫ */
+  .game-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .back-btn { background: #1a1a2e; border: none; color: #e0e0ff; padding: 8px 14px; border-radius: 10px; cursor: pointer; font-size: 13px; }
+  .game-title { font-size: 18px; font-weight: 600; }
+
+  .bet-section { background: #1a1a2e; border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+  .bet-label { font-size: 12px; color: #6666aa; margin-bottom: 10px; }
+  .bet-options { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bet-opt { background: #0f0f1a; border: 1px solid #2a2a4a; border-radius: 10px; padding: 8px 14px; color: #9999cc; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+  .bet-opt.selected { background: #2a2a5a; border-color: #5b5ef4; color: #e0e0ff; }
+
+  .play-btn { width: 100%; background: #5b5ef4; border: none; border-radius: 14px; padding: 15px; color: white; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 12px; }
+  .play-btn:active { opacity: 0.85; }
+
+  /* КРЕСТИКИ-НОЛИКИ */
+  .ttt-status { text-align: center; font-size: 14px; color: #9999cc; margin-bottom: 16px; background: #1a1a2e; padding: 10px; border-radius: 10px; }
+  .ttt-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+  .ttt-cell { background: #1a1a2e; border-radius: 12px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; border: 1px solid #2a2a4a; transition: background 0.15s; }
+  .ttt-cell:hover { background: #2a2a4a; }
+  .ttt-cell.x { color: #5b5ef4; }
+  .ttt-cell.o { color: #f45b8e; }
+
+  /* КАМЕНЬ-НОЖНИЦЫ-БУМАГА */
+  .rps-choices { display: flex; justify-content: space-around; margin: 20px 0; }
+  .rps-btn { background: #1a1a2e; border: 2px solid #2a2a4a; border-radius: 16px; padding: 20px; font-size: 36px; cursor: pointer; transition: all 0.2s; }
+  .rps-btn:hover { border-color: #5b5ef4; transform: scale(1.05); }
+  .rps-result { text-align: center; background: #1a1a2e; border-radius: 14px; padding: 16px; margin-top: 10px; }
+  .rps-result .vs { display: flex; justify-content: space-around; align-items: center; font-size: 40px; margin-bottom: 10px; }
+  .rps-outcome { font-size: 20px; font-weight: 600; }
+  .win { color: #4ade80; }
+  .lose { color: #f45b5b; }
+  .draw { color: #ffd700; }
+
+  /* УГАДАЙ ЧИСЛО */
+  .guess-info { background: #1a1a2e; border-radius: 14px; padding: 14px; margin-bottom: 14px; text-align: center; }
+  .guess-attempts { font-size: 24px; font-weight: 600; color: #5b5ef4; }
+  .guess-label { font-size: 12px; color: #6666aa; }
+  .guess-hint { font-size: 14px; color: #ffd700; margin-top: 8px; }
+  .guess-input { width: 100%; background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 12px; padding: 14px; color: #e0e0ff; font-size: 18px; text-align: center; margin-bottom: 10px; }
+  .guess-btn { width: 100%; background: #5b5ef4; border: none; border-radius: 12px; padding: 14px; color: white; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 8px; }
+
+  /* ШАШКИ */
+  .checkers-board { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; background: #2a2a4a; border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+  .checkers-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .checkers-cell.dark { background: #1a1a2e; }
+  .checkers-cell.light { background: #2a2a5a; }
+  .checkers-cell.selected { background: #3a3a7a; }
+  .checker { width: 70%; height: 70%; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+  .checker.red { background: #f45b5b; border: 2px solid #ff8888; }
+  .checker.white { background: #e0e0ff; border: 2px solid #ffffff; color: #1a1a2e; }
+  .checker.king::after { content: '♛'; font-size: 10px; }
+
+  /* ИНВАЙТ */
+  .invite-box { background: #1a1a2e; border-radius: 14px; padding: 14px; text-align: center; }
+  .invite-link { background: #0f0f1a; border-radius: 10px; padding: 10px; font-size: 11px; color: #5b5ef4; word-break: break-all; margin: 10px 0; }
+  .copy-btn { background: #5b5ef4; border: none; border-radius: 10px; padding: 10px 20px; color: white; font-size: 13px; cursor: pointer; }
+
+  /* НАВБАР */
+  .navbar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a2e; border-top: 1px solid #2a2a4a; display: flex; padding: 8px 0 20px; }
+  .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px; }
+  .nav-icon { font-size: 20px; }
+  .nav-label { font-size: 10px; color: #6666aa; }
+  .nav-item.active .nav-label { color: #5b5ef4; }
+
+  .content-wrap { padding-bottom: 80px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎮 GameZone</h1>
+  <div class="stars-badge">★ <span id="balance">250</span></div>
+</div>
+
+<!-- ГЛАВНАЯ -->
+<div class="screen active content-wrap" id="screen-home">
+  <div class="section-title">Выбери игру</div>
+  <div class="games-grid">
+    <div class="game-card" onclick="openGame('ttt')">
+      <div class="game-icon">✕○</div>
+      <div class="game-name">Крестики-нолики</div>
+      <div class="game-desc">2 игрока</div>
+    </div>
+    <div class="game-card" onclick="openGame('rps')">
+      <div class="game-icon">✊</div>
+      <div class="game-name">Камень-ножницы</div>
+      <div class="game-desc">Против бота</div>
+    </div>
+    <div class="game-card" onclick="openGame('guess')">
+      <div class="game-icon">🔢</div>
+      <div class="game-name">Угадай число</div>
+      <div class="game-desc">1-100</div>
+    </div>
+    <div class="game-card" onclick="openGame('checkers')">
+      <div class="game-icon">⬛</div>
+      <div class="game-name">Шашки</div>
+      <div class="game-desc">2 игрока</div>
+    </div>
+  </div>
+
+  <div class="section-title">Таблица лидеров</div>
+  <div class="lb-card">
+    <div class="lb-row"><div class="lb-rank gold">1</div><div class="lb-name">Alexandr</div><div class="lb-stars">★ 1240</div></div>
+    <div class="lb-row"><div class="lb-rank silver">2</div><div class="lb-name">Самуэл</div><div class="lb-stars">★ 890</div></div>
+    <div class="lb-row"><div class="lb-rank bronze">3</div><div class="lb-name">La Gotcha</div><div class="lb-stars">★ 650</div></div>
+    <div class="lb-row"><div class="lb-rank">4</div><div class="lb-name">Ты</div><div class="lb-stars">★ <span id="my-rank-stars">250</span></div></div>
+  </div>
+</div>
+
+<!-- ЭКРАН ИГРЫ -->
+<div class="screen content-wrap" id="screen-game">
+  <div class="game-header">
+    <button class="back-btn" onclick="goHome()">← Назад</button>
+    <div class="game-title" id="game-title"></div>
+  </div>
+
+  <!-- ТТТ -->
+  <div id="game-ttt" style="display:none">
+    <div class="ttt-status" id="ttt-status">Ход: ❌</div>
+    <div class="ttt-board" id="ttt-board"></div>
+    <button class="play-btn" onclick="resetTTT()">Новая игра</button>
+    <div class="invite-box">
+      <div style="font-size:13px; color:#9999cc; margin-bottom:8px;">Пригласи друга по ссылке:</div>
+      <div class="invite-link">https://t.me/toytime_bot?start=ttt_game</div>
+      <button class="copy-btn" onclick="copyInvite()">Скопировать ссылку</button>
+    </div>
+  </div>
+
+  <!-- КНБ -->
+  <div id="game-rps" style="display:none">
+    <div style="text-align:center; font-size:14px; color:#9999cc; margin-bottom:10px;">Выбери своё оружие:</div>
+    <div class="rps-choices">
+      <div class="rps-btn" onclick="playRPS('rock')">✊</div>
+      <div class="rps-btn" onclick="playRPS('scissors')">✌️</div>
+      <div class="rps-btn" onclick="playRPS('paper')">✋</div>
+    </div>
+    <div class="rps-result" id="rps-result" style="display:none">
+      <div class="vs">
+        <span id="rps-player">✊</span>
+        <span style="font-size:16px; color:#6666aa;">vs</span>
+        <span id="rps-bot">✊</span>
+      </div>
+      <div class="rps-outcome" id="rps-outcome"></div>
+    </div>
+  </div>
+
+  <!-- УГАДАЙ ЧИСЛО -->
+  <div id="game-guess" style="display:none">
+    <div class="guess-info">
+      <div class="guess-attempts" id="guess-attempts">7</div>
+      <div class="guess-label">попыток осталось</div>
+      <div class="guess-hint" id="guess-hint">Загадано число от 1 до 100</div>
+    </div>
+    <input class="guess-input" type="number" id="guess-input" placeholder="Введи число..." min="1" max="100">
+    <button class="guess-btn" onclick="makeGuess()">Угадать</button>
+    <button class="play-btn" onclick="resetGuess()">Новая игра</button>
+  </div>
+
+  <!-- ШАШКИ -->
+  <div id="game-checkers" style="display:none">
+    <div class="ttt-status" id="checkers-status">Ход: красные</div>
+    <div class="checkers-board" id="checkers-board"></div>
+    <button class="play-btn" onclick="resetCheckers()">Новая игра</button>
+  </div>
+</div>
+
+<!-- НАВБАР -->
+<div class="navbar">
+  <div class="nav-item active" onclick="showTab('home')" id="nav-home">
+    <div class="nav-icon">🎮</div>
+    <div class="nav-label">Игры</div>
+  </div>
+  <div class="nav-item" onclick="showTab('leaders')" id="nav-leaders">
+    <div class="nav-icon">🏆</div>
+    <div class="nav-label">Лидеры</div>
+  </div>
+</div>
+
+<script>
+// ─── НАВИГАЦИЯ ───────────────────────────────────────────────
+let balance = 250;
+
+function showTab(tab) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('nav-' + tab).classList.add('active');
+  if (tab === 'home') goHome();
+}
+
+function goHome() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-home').classList.add('active');
+}
+
+function openGame(game) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-game').classList.add('active');
+  document.querySelectorAll('#screen-game > div[id^="game-"]').forEach(g => g.style.display = 'none');
+  document.getElementById('game-' + game).style.display = 'block';
+  const names = { ttt: 'Крестики-нолики', rps: 'Камень-ножницы-бумага', guess: 'Угадай число', checkers: 'Шашки' };
+  document.getElementById('game-title').textContent = names[game];
+  if (game === 'ttt') resetTTT();
+  if (game === 'guess') resetGuess();
+  if (game === 'checkers') resetCheckers();
+}
+
+function copyInvite() {
+  navigator.clipboard.writeText('https://t.me/toytime_bot?start=ttt_game');
+  alert('Ссылка скопирована!');
+}
+
+// ─── КРЕСТИКИ-НОЛИКИ ────────────────────────────────────────
+let tttBoard, tttCurrent, tttOver;
+
+function resetTTT() {
+  tttBoard = Array(9).fill('');
+  tttCurrent = 'X';
+  tttOver = false;
+  document.getElementById('ttt-status').textContent = 'Ход: ❌';
+  renderTTT();
+}
+
+function renderTTT() {
+  const board = document.getElementById('ttt-board');
+  board.innerHTML = '';
+  tttBoard.forEach((cell, i) => {
+    const div = document.createElement('div');
+    div.className = 'ttt-cell' + (cell === 'X' ? ' x' : cell === 'O' ? ' o' : '');
+    div.textContent = cell === 'X' ? '❌' : cell === 'O' ? '⭕' : '';
+    div.onclick = () => tttMove(i);
+    board.appendChild(div);
+  });
+}
+
+function tttMove(i) {
+  if (tttOver || tttBoard[i]) return;
+  tttBoard[i] = tttCurrent;
+  const winner = checkTTTWinner();
+  if (winner) {
+    document.getElementById('ttt-status').textContent = winner === 'draw' ? '🤝 Ничья!' : (winner === 'X' ? '❌' : '⭕') + ' Победа!';
+    tttOver = true;
+  } else {
+    tttCurrent = tttCurrent === 'X' ? 'O' : 'X';
+    document.getElementById('ttt-status').textContent = 'Ход: ' + (tttCurrent === 'X' ? '❌' : '⭕');
+  }
+  renderTTT();
+}
+
+function checkTTTWinner() {
+  const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  for (const [a,b,c] of lines) {
+    if (tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c]) return tttBoard[a];
+  }
+  return tttBoard.every(c => c) ? 'draw' : null;
+}
+
+// ─── КАМЕНЬ-НОЖНИЦЫ-БУМАГА ──────────────────────────────────
+const rpsEmoji = { rock: '✊', scissors: '✌️', paper: '✋' };
+const rpsChoices = ['rock', 'scissors', 'paper'];
+
+function playRPS(player) {
+  const bot = rpsChoices[Math.floor(Math.random() * 3)];
+  document.getElementById('rps-player').textContent = rpsEmoji[player];
+  document.getElementById('rps-bot').textContent = rpsEmoji[bot];
+  let outcome, cls;
+  if (player === bot) { outcome = '🤝 Ничья!'; cls = 'draw'; }
+  else if ((player==='rock'&&bot==='scissors')||(player==='scissors'&&bot==='paper')||(player==='paper'&&bot==='rock')) { outcome = '🏆 Ты победил!'; cls = 'win'; }
+  else { outcome = '💀 Ты проиграл'; cls = 'lose'; }
+  const el = document.getElementById('rps-outcome');
+  el.textContent = outcome;
+  el.className = 'rps-outcome ' + cls;
+  document.getElementById('rps-result').style.display = 'block';
+}
+
+// ─── УГАДАЙ ЧИСЛО ───────────────────────────────────────────
+let guessSecret, guessAttempts;
+
+function resetGuess() {
+  guessSecret = Math.floor(Math.random() * 100) + 1;
+  guessAttempts = 7;
+  document.getElementById('guess-attempts').textContent = guessAttempts;
+  document.getElementById('guess-hint').textContent = 'Загадано число от 1 до 100';
+  document.getElementById('guess-input').value = '';
+  document.getElementById('guess-input').disabled = false;
+}
+
+function makeGuess() {
+  const val = parseInt(document.getElementById('guess-input').value);
+  if (!val || val < 1 || val > 100) { alert('Введи число от 1 до 100'); return; }
+  guessAttempts--;
+  document.getElementById('guess-attempts').textContent = guessAttempts;
+  const hint = document.getElementById('guess-hint');
+  if (val === guessSecret) {
+    hint.textContent = '🎉 Угадал! Это было ' + guessSecret;
+    document.getElementById('guess-input').disabled = true;
+  } else if (guessAttempts === 0) {
+    hint.textContent = '😢 Попытки закончились. Загадано было ' + guessSecret;
+    document.getElementById('guess-input').disabled = true;
+  } else {
+    hint.textContent = val < guessSecret ? '📈 Больше!' : '📉 Меньше!';
+  }
+  document.getElementById('guess-input').value = '';
+}
+
+// ─── ШАШКИ ──────────────────────────────────────────────────
+let checkersBoard, checkersCurrent, checkersSelected;
+
+function resetCheckers() {
+  checkersCurrent = 'red';
+  checkersSelected = null;
+  checkersBoard = Array(64).fill(null);
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 8; col++) {
+      if ((row + col) % 2 === 1) checkersBoard[row * 8 + col] = { color: 'white', king: false };
+    }
+  }
+  for (let row = 5; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      if ((row + col) % 2 === 1) checkersBoard[row * 8 + col] = { color: 'red', king: false };
+    }
+  }
+  document.getElementById('checkers-status').textContent = 'Ход: красные';
+  renderCheckers();
+}
+
+function renderCheckers() {
+  const board = document.getElementById('checkers-board');
+  board.innerHTML = '';
+  for (let i = 0; i < 64; i++) {
+    const row = Math.floor(i / 8), col = i % 8;
+    const cell = document.createElement('div');
+    cell.className = 'checkers-cell ' + ((row + col) % 2 === 0 ? 'light' : 'dark');
+    if (checkersSelected === i) cell.classList.add('selected');
+    const piece = checkersBoard[i];
+    if (piece) {
+      const checker = document.createElement('div');
+      checker.className = 'checker ' + piece.color + (piece.king ? ' king' : '');
+      checker.textContent = piece.king ? '♛' : '';
+      cell.appendChild(checker);
+    }
+    cell.onclick = () => checkersClick(i);
+    board.appendChild(cell);
+  }
+}
+
+function checkersClick(i) {
+  const piece = checkersBoard[i];
+  if (checkersSelected === null) {
+    if (piece && piece.color === checkersCurrent) { checkersSelected = i; renderCheckers(); }
+  } else {
+    if (piece && piece.color === checkersCurrent) { checkersSelected = i; renderCheckers(); return; }
+    const from = checkersSelected;
+    const frow = Math.floor(from / 8), fcol = from % 8;
+    const trow = Math.floor(i / 8), tcol = i % 8;
+    const dr = trow - frow, dc = tcol - fcol;
+    const p = checkersBoard[from];
+    const dirs = p.king ? [-1,1] : (p.color === 'red' ? [-1] : [1]);
+    if (Math.abs(dc) === 1 && dirs.includes(dr) && !checkersBoard[i]) {
+      checkersBoard[i] = checkersBoard[from];
+      checkersBoard[from] = null;
+      if ((p.color === 'red' && trow === 0) || (p.color === 'white' && trow === 7)) checkersBoard[i].king = true;
+      checkersCurrent = checkersCurrent === 'red' ? 'white' : 'red';
+      document.getElementById('checkers-status').textContent = 'Ход: ' + (checkersCurrent === 'red' ? 'красные' : 'белые');
+    } else if (Math.abs(dc) === 2 && Math.abs(dr) === 2) {
+      const mrow = frow + dr/2, mcol = fcol + dc/2;
+      const mid = mrow * 8 + mcol;
+      if (checkersBoard[mid] && checkersBoard[mid].color !== p.color && !checkersBoard[i]) {
+        checkersBoard[i] = checkersBoard[from];
+        checkersBoard[from] = null;
+        checkersBoard[mid] = null;
+        if ((p.color === 'red' && trow === 0) || (p.color === 'white' && trow === 7)) checkersBoard[i].king = true;
+        checkersCurrent = checkersCurrent === 'red' ? 'white' : 'red';
+        document.getElementById('checkers-status').textContent = 'Ход: ' + (checkersCurrent === 'red' ? 'красные' : 'белые');
+      }
+    }
+    checkersSelected = null;
+    renderCheckers();
+  }
+}
+
+// Инициализация Telegram Web App
+try { window.Telegram.WebApp.ready(); } catch(e) {}
+</script>
+</body>
+</html>
