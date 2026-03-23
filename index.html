@@ -572,11 +572,24 @@ function surrender() { if(!confirm("Сдаться?"))return; sendWS({type:"surr
 
 function rematch() {
   if(!currentGame||!currentGameType){goHome();return;}
-  const gid=makeGameId(currentGameType);
-  document.getElementById("waiting-code").textContent=gid;
-  document.getElementById("result-box").classList.add("hidden");
-  showScreen("waiting");
-  connectWS(gid);
+  const g = currentGame;
+  const myid = String(tgUser.id);
+  const opp = String(g.player1.id)===myid ? g.player2 : g.player1;
+  if(!opp){toast("Соперник уже вышел");goHome();return;}
+  const gid = makeGameId(currentGameType);
+  // Отправляем вызов сопернику через бота
+  fetch(`${SERVER_HTTP}/challenge`,{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({from_id:tgUser.id,to_id:parseInt(opp.id),game_type:currentGameType,from_name:tgUser.first_name,game_id:gid})
+  }).then(r=>r.json()).then(data=>{
+    if(data.ok){
+      toast("✅ Реванш предложен! Ждём соперника...");
+      document.getElementById("waiting-code").textContent=data.game_id;
+      document.getElementById("result-box").classList.add("hidden");
+      showScreen("waiting");
+      connectWS(data.game_id);
+    } else { toast("❌ Не удалось предложить реванш"); }
+  }).catch(()=>toast("❌ Ошибка соединения"));
 }
 
 // ══ СООБЩЕНИЯ СЕРВЕРА ══════════════════════════════
