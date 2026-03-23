@@ -11,25 +11,20 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
 .hidden { display:none !important; }
 .screen { display:none; flex-direction:column; min-height:100vh; }
 .screen.active { display:flex; }
-
 .header { background:#1a1a2e; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #2a2a4a; flex-shrink:0; }
 .header h1 { font-size:18px; font-weight:600; }
 .back-btn { background:#1a1a2e; border:1px solid #3a3a5a; color:#e0e0ff; padding:10px 18px; border-radius:12px; cursor:pointer; font-size:14px; }
-
 .body-scroll { flex:1; overflow-y:auto; padding:14px; padding-bottom:90px; }
 .section-title { font-size:11px; color:#6666aa; text-transform:uppercase; letter-spacing:.5px; margin:16px 0 10px; }
-
 .games-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .game-card { background:#1a1a2e; border-radius:18px; padding:20px 16px; border:1px solid #2a2a4a; cursor:pointer; transition:all .15s; }
 .game-card:active { border-color:#5b5ef4; transform:scale(.96); }
 .game-icon { font-size:28px; margin-bottom:10px; }
 .game-name { font-size:14px; font-weight:600; }
 .game-desc { font-size:12px; color:#6666aa; margin-top:4px; }
-
 .tab-bar { display:flex; background:#1a1a2e; border-radius:12px; padding:4px; margin-bottom:14px; gap:2px; }
 .tab-btn { flex:1; padding:10px 4px; text-align:center; font-size:12px; color:#6666aa; border-radius:10px; cursor:pointer; transition:all .15s; white-space:nowrap; }
 .tab-btn.active { background:#2a2a4a; color:#e0e0ff; font-weight:600; }
-
 .lb-card { background:#1a1a2e; border-radius:14px; overflow:hidden; }
 .lb-row { display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom:1px solid #1e1e3a; }
 .lb-row:last-child { border-bottom:none; }
@@ -37,74 +32,65 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
 .lb-rank.g{color:#ffd700} .lb-rank.s{color:#aaaacc} .lb-rank.b{color:#cd7f32}
 .lb-name { flex:1; font-size:14px; }
 .lb-score { font-size:13px; color:#ffd700; font-weight:600; }
-
 .friend-card { background:#1a1a2e; border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:12px; border:1px solid #2a2a4a; margin-bottom:8px; }
 .friend-avatar { width:42px; height:42px; border-radius:50%; background:#2a2a5a; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700; color:#9999cc; flex-shrink:0; }
 .friend-info { flex:1; }
 .friend-name { font-size:14px; font-weight:600; }
 .friend-stats { font-size:11px; color:#6666aa; margin-top:2px; }
-.challenge-btn { background:#5b5ef4; border:none; border-radius:10px; padding:9px 14px; color:#fff; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; }
-
+.challenge-btn { background:#5b5ef4; border:none; border-radius:10px; padding:9px 14px; color:#fff; font-size:13px; font-weight:600; cursor:pointer; }
 .user-card { background:#1a1a2e; border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:12px; border:1px solid #2a2a4a; margin-bottom:8px; }
 .add-btn { background:#27ae60; border:none; border-radius:10px; padding:9px 14px; color:#fff; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; }
 .added-btn { background:#2a2a4a; border:none; border-radius:10px; padding:9px 14px; color:#6666aa; font-size:13px; cursor:default; white-space:nowrap; }
-
 .modal-overlay { position:fixed; inset:0; background:#000a; z-index:200; display:flex; align-items:flex-end; justify-content:center; }
 .modal { background:#1a1a2e; border-radius:20px 20px 0 0; padding:20px; width:100%; max-width:480px; }
 .modal-title { font-size:16px; font-weight:600; margin-bottom:14px; text-align:center; }
 .modal-game-btn { width:100%; background:#0f0f1a; border:1px solid #2a2a4a; border-radius:14px; padding:14px 16px; color:#e0e0ff; font-size:15px; font-weight:500; cursor:pointer; margin-bottom:8px; display:flex; align-items:center; gap:12px; transition:all .15s; }
 .modal-game-btn:active { border-color:#5b5ef4; }
 .modal-cancel { width:100%; background:#2a2a4a; border:none; border-radius:14px; padding:14px; color:#9999cc; font-size:15px; cursor:pointer; margin-top:4px; }
-
 .lobby-body { padding:16px; flex:1; display:flex; flex-direction:column; gap:14px; }
 .lobby-card { background:#1a1a2e; border-radius:16px; padding:18px; }
 .lobby-title { font-size:16px; font-weight:600; margin-bottom:6px; }
 .lobby-desc { font-size:13px; color:#9999cc; margin-bottom:16px; line-height:1.5; }
-
 .btn { width:100%; border:none; border-radius:14px; padding:16px; font-size:15px; font-weight:600; cursor:pointer; transition:all .15s; display:block; text-align:center; }
 .btn:active { transform:scale(.97); opacity:.9; }
-.btn-primary{background:#5b5ef4;color:#fff}
-.btn-success{background:#27ae60;color:#fff}
-.btn-warning{background:#e67e22;color:#fff}
-.btn-secondary{background:#2a2a4a;color:#e0e0ff}
+.btn-primary{background:#5b5ef4;color:#fff} .btn-success{background:#27ae60;color:#fff}
+.btn-warning{background:#e67e22;color:#fff} .btn-secondary{background:#2a2a4a;color:#e0e0ff}
 .btn+.btn{margin-top:10px}
 .input-field{width:100%;background:#0f0f1a;border:1px solid #3a3a5a;border-radius:12px;padding:14px 16px;color:#e0e0ff;font-size:15px;outline:none}
 .input-field:focus{border-color:#5b5ef4}
-
 .connect-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:16px;text-align:center}
 .connect-spinner{width:48px;height:48px;border:3px solid #2a2a4a;border-top-color:#5b5ef4;border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .game-code-box{background:#1a1a2e;border:2px dashed #3a3a6a;border-radius:14px;padding:16px 24px;font-size:20px;font-weight:700;color:#5b5ef4;letter-spacing:2px;cursor:pointer;width:100%;text-align:center}
-
 .game-header{background:#1a1a2e;padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #2a2a4a;flex-shrink:0}
 .game-title-text{font-size:15px;font-weight:600;flex:1}
 .surrender-btn{background:none;border:1px solid #c0392b;color:#c0392b;padding:9px 13px;border-radius:10px;font-size:13px;cursor:pointer}
 .game-body{flex:1;overflow-y:auto;padding:14px;padding-bottom:20px}
 .status-bar{background:#1a1a2e;border-radius:12px;padding:12px 16px;font-size:14px;color:#9999cc;margin-bottom:14px;text-align:center;line-height:1.4}
 .status-bar b{color:#e0e0ff}
-
 .result-box{background:#1a1a2e;border-radius:16px;padding:20px;text-align:center;margin-bottom:14px}
 .result-icon{font-size:52px;margin-bottom:10px}
 .result-text{font-size:20px;font-weight:700;margin-bottom:6px}
-.result-sub{font-size:13px;color:#9999cc;margin-bottom:16px}
-.rematch-status{font-size:13px;color:#5b5ef4;margin-top:8px;min-height:20px}
+.result-sub{font-size:13px;color:#9999cc;margin-bottom:14px}
+
+/* РЕВАНШ НОТИФИКАЦИЯ */
+.rematch-notify{background:#1e2a1e;border:1px solid #27ae60;border-radius:14px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.rematch-notify-text{flex:1;font-size:14px;color:#4ade80}
+.rematch-accept-btn{background:#27ae60;border:none;border-radius:10px;padding:10px 16px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
 
 .ttt-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
 .ttt-cell{background:#1a1a2e;border-radius:14px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer;border:1px solid #2a2a4a;transition:all .15s}
 .ttt-cell:active{background:#2a2a4a;transform:scale(.95)}
-
 .rps-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
 .rps-btn{background:#1a1a2e;border:2px solid #2a2a4a;border-radius:18px;padding:20px 10px;font-size:42px;cursor:pointer;transition:all .2s;text-align:center}
 .rps-btn:active{transform:scale(.93)}
 .rps-btn.selected{border-color:#5b5ef4;background:#1e1e3a}
 .rps-label{font-size:11px;color:#6666aa;text-align:center;margin-top:4px}
-
 .checkers-wrap{border-radius:12px;overflow:hidden;margin-bottom:14px;border:2px solid #2a2a4a}
 .checkers-board{display:grid;grid-template-columns:repeat(8,1fr)}
 .ch-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:clamp(14px,3.5vw,22px)}
 .ch-light{background:#2a2a5a}.ch-dark{background:#1a1a2e}
 .ch-cell.sel{background:#3a5a2a!important}.ch-cell.target{background:#2a4a1a!important}.ch-cell.capture{background:#5a2a1a!important}
-
 .dice-score-bar{display:flex;background:#1a1a2e;border-radius:14px;padding:14px;margin-bottom:14px}
 .dice-score-item{flex:1;text-align:center}
 .dice-score-val{font-size:28px;font-weight:700;color:#5b5ef4}
@@ -115,7 +101,6 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
 .dice-num-btn.selected{background:#1e1e3a;border-color:#5b5ef4;color:#5b5ef4}
 .dice-display{display:flex;justify-content:center;gap:20px;margin:20px 0;font-size:56px}
 .dice-log-row{font-size:13px;padding:6px 0;border-bottom:1px solid #1e1e3a;color:#9999cc}
-
 .chat-wrap{background:#1a1a2e;border-radius:14px;padding:14px;margin-top:14px}
 .chat-title{font-size:11px;color:#6666aa;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .chat-messages{max-height:130px;overflow-y:auto;margin-bottom:10px}
@@ -127,23 +112,18 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
 .chat-input{flex:1;background:#0f0f1a;border:1px solid #2a2a4a;border-radius:10px;padding:10px 14px;color:#e0e0ff;font-size:14px;outline:none}
 .chat-input:focus{border-color:#5b5ef4}
 .chat-send{background:#5b5ef4;border:none;border-radius:10px;padding:10px 16px;color:#fff;font-size:15px;cursor:pointer;font-weight:600}
-
 .navbar{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;border-top:1px solid #2a2a4a;display:flex;padding:10px 0 22px;z-index:100}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:6px}
 .nav-icon{font-size:22px}
 .nav-label{font-size:10px;color:#6666aa}
 .nav-item.active .nav-label{color:#5b5ef4}
-
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333355ee;color:#e0e0ff;padding:12px 24px;border-radius:24px;font-size:14px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;max-width:80vw;text-align:center}
 .toast.show{opacity:1}
-.empty-state{text-align:center;padding:32px 16px;color:#6666aa}
-.empty-icon{font-size:40px;margin-bottom:12px}
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
 
-<!-- MODAL: выбор игры для вызова -->
 <div class="modal-overlay hidden" id="challenge-modal" onclick="if(event.target===this)this.classList.add('hidden')">
   <div class="modal">
     <div class="modal-title">⚔️ Выбери игру</div>
@@ -155,12 +135,9 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
   </div>
 </div>
 
-<!-- ══ ГЛАВНАЯ ══ -->
+<!-- ГЛАВНАЯ -->
 <div class="screen active" id="screen-home">
-  <div class="header">
-    <h1>🎮 GameZone</h1>
-    <div style="font-size:12px;color:#6666aa" id="my-name-badge"></div>
-  </div>
+  <div class="header"><h1>🎮 GameZone</h1><div style="font-size:12px;color:#6666aa" id="my-name-badge"></div></div>
   <div class="body-scroll">
     <div class="tab-bar">
       <div class="tab-btn active" id="htab-games" onclick="switchHomeTab('games')">🎮 Игры</div>
@@ -198,7 +175,7 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
   </div>
 </div>
 
-<!-- ══ ЛОББИ ══ -->
+<!-- ЛОББИ -->
 <div class="screen" id="screen-lobby">
   <div class="header">
     <button class="back-btn" onclick="goHome()">← Назад</button>
@@ -208,7 +185,7 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
   <div class="lobby-body">
     <div class="lobby-card">
       <div class="lobby-title">🆕 Создать игру</div>
-      <div class="lobby-desc">Создай игру — получишь код для друга</div>
+      <div class="lobby-desc">Создай игру и поделись кодом с другом</div>
       <button class="btn btn-primary" onclick="createGame()">Создать игру</button>
     </div>
     <div class="lobby-card">
@@ -220,7 +197,7 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
   </div>
 </div>
 
-<!-- ══ ОЖИДАНИЕ ══ -->
+<!-- ОЖИДАНИЕ -->
 <div class="screen" id="screen-waiting">
   <div class="header">
     <button class="back-btn" onclick="leaveGame()">← Выйти</button>
@@ -236,7 +213,7 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
   </div>
 </div>
 
-<!-- ══ ИГРА ══ -->
+<!-- ИГРА -->
 <div class="screen" id="screen-game">
   <div class="game-header">
     <button class="back-btn" onclick="leaveGame()">← Выйти</button>
@@ -246,18 +223,23 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
   <div class="game-body">
     <div class="status-bar" id="game-status">Загрузка...</div>
 
+    <!-- РЕВАНШ УВЕДОМЛЕНИЕ -->
+    <div class="rematch-notify hidden" id="rematch-notify">
+      <div class="rematch-notify-text" id="rematch-notify-text">🔄 Соперник хочет реванш!</div>
+      <button class="rematch-accept-btn" onclick="acceptRematch()">Принять!</button>
+    </div>
+
     <!-- РЕЗУЛЬТАТ -->
     <div class="result-box hidden" id="result-box">
       <div class="result-icon" id="result-icon">🏆</div>
       <div class="result-text" id="result-text"></div>
       <div class="result-sub" id="result-sub"></div>
-      <button class="btn btn-primary" id="rematch-btn" onclick="rematch()" style="margin-top:4px">🔄 Реванш</button>
-      <div class="rematch-status" id="rematch-status"></div>
-      <button class="btn btn-secondary" onclick="goHome()" style="margin-top:6px">🏠 На главную</button>
+      <button class="btn btn-primary" id="rematch-btn" onclick="requestRematch()" style="margin-top:4px">🔄 Реванш</button>
+      <div id="rematch-waiting" class="hidden" style="color:#5b5ef4;font-size:13px;margin-top:8px">⏳ Ждём соперника...</div>
+      <button class="btn btn-secondary" onclick="goHome()" style="margin-top:10px">🏠 На главную</button>
     </div>
 
     <div id="ttt-area" class="hidden"><div class="ttt-board" id="ttt-board"></div></div>
-
     <div id="rps-area" class="hidden">
       <div style="text-align:center;font-size:13px;color:#9999cc;margin-bottom:4px">Выбери оружие:</div>
       <div class="rps-choices">
@@ -267,14 +249,12 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
       </div>
       <button class="btn btn-success" id="rps-ready-btn" onclick="rpsReady()">✅ Готов!</button>
     </div>
-
     <div id="checkers-area" class="hidden">
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:#6666aa">
         <span>🔴 Твои</span><span>⚪ Соперник</span><span>👑 Дамка кр.</span><span>💎 Дамка бел.</span><span>🟢 Ход</span><span>💥 Бить!</span>
       </div>
       <div class="checkers-wrap"><div class="checkers-board" id="checkers-board"></div></div>
     </div>
-
     <div id="dice-area" class="hidden">
       <div class="dice-score-bar">
         <div class="dice-score-item"><div class="dice-score-val" id="dice-s1">0</div><div class="dice-score-name" id="dice-n1">Игрок 1</div></div>
@@ -288,7 +268,6 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
         <div id="dice-wait-area" class="hidden"><div style="text-align:center;padding:20px;color:#9999cc;font-size:14px" id="dice-wait-msg">⏳ Ждём...</div></div>
       </div>
     </div>
-
     <div class="chat-wrap">
       <div class="chat-title">💬 Чат</div>
       <div class="chat-messages" id="chat-messages"></div>
@@ -306,288 +285,202 @@ const SERVER_WS   = "wss://gamezone-server-production.up.railway.app";
 const GAME_NAMES  = {ttt:"Крестики-нолики",rps:"Камень-ножницы-бумага",checkers:"Шашки",dice:"Кости"};
 const GAME_ICONS  = {ttt:"✕○",rps:"✊",checkers:"⬛",dice:"🎲"};
 
-let tgUser = null, ws = null;
-let currentGame = null, currentGameType = null, currentGameId = null;
-let rpsChoice = null, diceGuess = null;
-let challengeTargetId = null;
-let friends = [], allUsers = [];
-let friendIds = new Set();
+let tgUser=null, ws=null;
+let currentGame=null, currentGameType=null, currentGameId=null;
+let rpsChoice=null, diceGuess=null, challengeTargetId=null;
+let friends=[], allUsers=[], friendIds=new Set();
 
-// ── КЛЮЧЕВОЕ: сохраняем соперника до разрыва соединения ──
-let savedOpponent = null; // {id, name} — сохраняется при финише игры
+try{window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();tgUser=window.Telegram.WebApp.initDataUnsafe?.user;}catch(e){}
+if(!tgUser) tgUser={id:Date.now()%100000,first_name:"Игрок"+(Date.now()%100)};
+document.getElementById("my-name-badge").textContent=tgUser.first_name;
 
-try { window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand(); tgUser = window.Telegram.WebApp.initDataUnsafe?.user; } catch(e){}
-if (!tgUser) tgUser = {id: Date.now()%100000, first_name:"Игрок"+(Date.now()%100)};
-document.getElementById("my-name-badge").textContent = tgUser.first_name;
-
-const urlParams = new URLSearchParams(window.location.search);
-const joinParam = urlParams.get("join");
-if (joinParam) {
-  currentGameType = joinParam.split("_")[0];
-  setTimeout(()=>{ connectWS(joinParam); showScreen("waiting"); document.getElementById("waiting-code").textContent = joinParam; }, 300);
+const urlParams=new URLSearchParams(window.location.search);
+const joinParam=urlParams.get("join");
+if(joinParam){
+  currentGameType=joinParam.split("_")[0];
+  setTimeout(()=>{connectWS(joinParam);showScreen("waiting");document.getElementById("waiting-code").textContent=joinParam;},300);
 }
-
 loadData();
 
 // ══ НАВИГАЦИЯ ══
-function showScreen(id) {
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById("screen-"+id).classList.add("active");
-}
-function goHome() { disconnectWS(); showScreen("home"); }
-function setNav(tab) { ["home","friends","rating"].forEach(t=>document.getElementById("nav-"+t)?.classList.toggle("active",t===tab)); }
-function switchHomeTab(tab) {
-  ["games","friends","rating"].forEach(t=>{
-    document.getElementById("home-"+t)?.classList.toggle("hidden",t!==tab);
-    document.getElementById("htab-"+t)?.classList.toggle("active",t===tab);
-  });
+function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById("screen-"+id).classList.add("active");}
+function goHome(){disconnectWS();showScreen("home");}
+function setNav(tab){["home","friends","rating"].forEach(t=>document.getElementById("nav-"+t)?.classList.toggle("active",t===tab));}
+function switchHomeTab(tab){
+  ["games","friends","rating"].forEach(t=>{document.getElementById("home-"+t)?.classList.toggle("hidden",t!==tab);document.getElementById("htab-"+t)?.classList.toggle("active",t===tab);});
   if(tab==="friends") renderFriends();
-  if(tab==="rating") { loadRating(); switchRatingTab("all"); }
+  if(tab==="rating"){loadRating();switchRatingTab("all");}
 }
-function openLobby(type) {
-  currentGameType=type;
-  document.getElementById("lobby-title").textContent=GAME_ICONS[type]+" "+GAME_NAMES[type];
-  document.getElementById("join-code").value="";
-  showScreen("lobby");
-}
+function openLobby(type){currentGameType=type;document.getElementById("lobby-title").textContent=GAME_ICONS[type]+" "+GAME_NAMES[type];document.getElementById("join-code").value="";showScreen("lobby");}
 
 // ══ ДАННЫЕ ══
-async function loadData() {
-  try {
-    const [fr, all] = await Promise.all([
+async function loadData(){
+  try{
+    const[fr,all]=await Promise.all([
       fetch(`${SERVER_HTTP}/friends/${tgUser.id}`).then(r=>r.json()),
       fetch(`${SERVER_HTTP}/users`).then(r=>r.json())
     ]);
-    friends = fr||[];
-    allUsers = (all||[]).filter(u=>String(u.id)!==String(tgUser.id));
-    friendIds = new Set(friends.map(f=>String(f.id)));
-  } catch(e) { friends=[]; allUsers=[]; }
+    friends=fr||[]; allUsers=(all||[]).filter(u=>String(u.id)!==String(tgUser.id));
+    friendIds=new Set(friends.map(f=>String(f.id)));
+  }catch(e){friends=[];allUsers=[];}
 }
 
 // ══ ДРУЗЬЯ ══
-function renderFriends() {
-  const fs = document.getElementById("friends-section");
-  const au = document.getElementById("all-users-section");
-
-  if (!friends.length) {
-    fs.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><div style="font-size:14px;color:#6666aa">Друзей пока нет.<br>Добавь игроков ниже!</div></div>`;
-  } else {
-    fs.innerHTML = `<div class="section-title">Мои друзья (${friends.length})</div>` +
-      friends.map(f=>`
-        <div class="friend-card">
-          <div class="friend-avatar">${(f.name||"?")[0]}</div>
-          <div class="friend-info">
-            <div class="friend-name">${f.name}</div>
-            <div class="friend-stats">★ ${f.wins} побед · ${f.games} игр</div>
-          </div>
-          <button class="challenge-btn" onclick="openChallengeModal(${f.id})">⚔️</button>
-        </div>`).join("");
-  }
-
-  const others = allUsers.filter(u=>!friendIds.has(String(u.id)));
-  if (!others.length) {
-    au.innerHTML = `<div style="text-align:center;color:#6666aa;font-size:13px;padding:12px">Все игроки уже в друзьях!</div>`;
-  } else {
-    au.innerHTML = others.map(u=>`
-      <div class="user-card" id="ucard-${u.id}">
-        <div class="friend-avatar">${(u.name||"?")[0]}</div>
-        <div class="friend-info">
-          <div class="friend-name">${u.name}</div>
-          <div class="friend-stats">★ ${u.wins} побед · ${u.games} игр</div>
-        </div>
-        <button class="add-btn" id="addbtn-${u.id}" onclick="addFriend(${u.id},'${u.name}',this)">+ Друг</button>
+function renderFriends(){
+  const fs=document.getElementById("friends-section");
+  const au=document.getElementById("all-users-section");
+  if(!friends.length){
+    fs.innerHTML=`<div style="text-align:center;padding:24px;color:#6666aa"><div style="font-size:36px;margin-bottom:10px">👥</div>Друзей пока нет. Добавь игроков ниже!</div>`;
+  }else{
+    fs.innerHTML=`<div class="section-title">Мои друзья (${friends.length})</div>`+
+      friends.map(f=>`<div class="friend-card">
+        <div class="friend-avatar">${(f.name||"?")[0]}</div>
+        <div class="friend-info"><div class="friend-name">${f.name}</div><div class="friend-stats">★ ${f.wins} побед · ${f.games} игр</div></div>
+        <button class="challenge-btn" onclick="openChallengeModal(${f.id})">⚔️ Вызов</button>
       </div>`).join("");
   }
+  const others=allUsers.filter(u=>!friendIds.has(String(u.id)));
+  if(!others.length){au.innerHTML=`<div style="text-align:center;color:#6666aa;font-size:13px;padding:12px">Все игроки уже в друзьях!</div>`;}
+  else{au.innerHTML=others.map(u=>`<div class="user-card">
+    <div class="friend-avatar">${(u.name||"?")[0]}</div>
+    <div class="friend-info"><div class="friend-name">${u.name}</div><div class="friend-stats">★ ${u.wins} побед · ${u.games} игр</div></div>
+    <button class="add-btn" id="addbtn-${u.id}" onclick="addFriend(${u.id},'${u.name}',this)">+ Друг</button>
+  </div>`).join("");}
 }
 
-async function addFriend(fid, fname, btn) {
-  // Мгновенно меняем кнопку
-  btn.className = "added-btn";
-  btn.textContent = "✓ Добавлен";
-  btn.disabled = true;
-  friendIds.add(String(fid));
-  friends.push({id:fid, name:fname, wins:0, games:0});
+async function addFriend(fid,fname,btn){
+  btn.className="added-btn"; btn.textContent="✓ Друг"; btn.disabled=true;
+  friendIds.add(String(fid)); friends.push({id:fid,name:fname,wins:0,games:0});
   toast(`✅ ${fname} добавлен!`);
-  try {
-    await fetch(`${SERVER_HTTP}/add_friend`,{
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({user_id:tgUser.id, friend_id:fid})
-    });
-  } catch(e) {}
+  try{await fetch(`${SERVER_HTTP}/add_friend`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({user_id:tgUser.id,friend_id:fid})});}catch(e){}
 }
 
 // ══ ВЫЗОВ ══
-function openChallengeModal(fid) {
-  challengeTargetId = fid;
-  document.getElementById("challenge-modal").classList.remove("hidden");
-}
+function openChallengeModal(fid){challengeTargetId=fid;document.getElementById("challenge-modal").classList.remove("hidden");}
 
-async function sendChallenge(gameType) {
+async function sendChallenge(gameType){
   document.getElementById("challenge-modal").classList.add("hidden");
   if(!challengeTargetId) return;
   toast("⏳ Отправляем вызов...");
-  try {
-    const res = await fetch(`${SERVER_HTTP}/challenge`,{
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({from_id:tgUser.id, to_id:challengeTargetId, game_type:gameType, from_name:tgUser.first_name})
-    });
-    const data = await res.json();
-    if(data.ok) {
-      currentGameType = gameType;
-      connectWS(data.game_id);
-      document.getElementById("waiting-code").textContent = data.game_id;
-      showScreen("waiting");
-      toast("✅ Вызов отправлен!");
-    } else { toast("❌ "+( data.error||"Ошибка")); }
-  } catch(e) { toast("❌ Ошибка соединения"); }
+  try{
+    const res=await fetch(`${SERVER_HTTP}/challenge`,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({from_id:tgUser.id,to_id:challengeTargetId,game_type:gameType,from_name:tgUser.first_name})});
+    const data=await res.json();
+    if(data.ok){currentGameType=gameType;connectWS(data.game_id);document.getElementById("waiting-code").textContent=data.game_id;showScreen("waiting");toast("✅ Вызов отправлен!");}
+    else toast("❌ "+(data.error||"Ошибка"));
+  }catch(e){toast("❌ Ошибка соединения");}
 }
 
-// ══ РЕВАНШ — ключевое исправление ══
-async function rematch() {
-  const opp = savedOpponent;
-  if(!opp) { toast("Соперник уже вышел"); goHome(); return; }
+// ══ РЕВАНШ ══
+function requestRematch(){
+  // Отправляем запрос на реванш через тот же WebSocket
+  sendWS({type:"rematch_request"});
+  document.getElementById("rematch-btn").disabled=true;
+  document.getElementById("rematch-btn").style.opacity=".5";
+  document.getElementById("rematch-waiting").classList.remove("hidden");
+  toast("⏳ Запрос на реванш отправлен...");
+}
 
-  const btn = document.getElementById("rematch-btn");
-  const status = document.getElementById("rematch-status");
-  btn.disabled = true; btn.style.opacity = ".5";
-  status.textContent = "⏳ Отправляем вызов...";
-
-  try {
-    const res = await fetch(`${SERVER_HTTP}/challenge`,{
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({
-        from_id: tgUser.id,
-        to_id: parseInt(opp.id),
-        game_type: currentGameType,
-        from_name: tgUser.first_name
-      })
-    });
-    const data = await res.json();
-    if(data.ok) {
-      status.textContent = "✅ Вызов отправлен! Ждём...";
-      // Подключаемся к новой игре
-      document.getElementById("waiting-code").textContent = data.game_id;
-      document.getElementById("result-box").classList.add("hidden");
-      showScreen("waiting");
-      connectWS(data.game_id);
-    } else {
-      status.textContent = "❌ Не удалось отправить";
-      btn.disabled = false; btn.style.opacity = "1";
-    }
-  } catch(e) {
-    status.textContent = "❌ Ошибка соединения";
-    btn.disabled = false; btn.style.opacity = "1";
-  }
+function acceptRematch(){
+  sendWS({type:"rematch_accept"});
+  document.getElementById("rematch-notify").classList.add("hidden");
+  toast("✅ Принимаем реванш...");
 }
 
 // ══ РЕЙТИНГ ══
-let allUsersCache = [];
-async function loadRating() {
-  try { allUsersCache = await fetch(`${SERVER_HTTP}/users`).then(r=>r.json()); } catch(e) {}
-  switchRatingTab("all");
-}
-function switchRatingTab(tab) {
+let allUsersCache=[];
+async function loadRating(){try{allUsersCache=await fetch(`${SERVER_HTTP}/users`).then(r=>r.json());}catch(e){} switchRatingTab("all");}
+function switchRatingTab(tab){
   ["all","ttt","rps","checkers","dice"].forEach(t=>document.getElementById("rtab-"+t)?.classList.toggle("active",t===tab));
-  const data = [...allUsersCache].sort((a,b)=>b.wins-a.wins).slice(0,10);
+  const data=[...allUsersCache].sort((a,b)=>b.wins-a.wins).slice(0,10);
   const medals=["g","s","b"];
-  const list = document.getElementById("rating-list");
+  const list=document.getElementById("rating-list");
   if(!data.length){list.innerHTML=`<div class="lb-row" style="justify-content:center;color:#6666aa">Нет данных</div>`;return;}
-  list.innerHTML = data.map((u,i)=>`
-    <div class="lb-row">
-      <div class="lb-rank ${medals[i]||""}">${i+1}</div>
-      <div class="lb-name">${u.name}</div>
-      <div class="lb-score">★ ${u.wins}</div>
-    </div>`).join("");
+  list.innerHTML=data.map((u,i)=>`<div class="lb-row"><div class="lb-rank ${medals[i]||""}">${i+1}</div><div class="lb-name">${u.name}</div><div class="lb-score">★ ${u.wins}</div></div>`).join("");
 }
 
 // ══ WEBSOCKET ══
-function connectWS(gameId) {
-  // Не разрываем — создаём новое
-  if(ws) { ws.onclose=null; ws.close(); ws=null; }
-  currentGameId = gameId;
-  const uid = String(tgUser.id);
-  const uname = encodeURIComponent(tgUser.first_name);
-  ws = new WebSocket(`${SERVER_WS}/ws/${gameId}/${uid}/${uname}`);
-  ws.onopen = ()=>console.log("WS ok");
-  ws.onmessage = e=>handleServerMsg(JSON.parse(e.data));
-  ws.onclose = ()=>{ if(currentGameId) toast("⚠️ Соединение прервано"); };
-  ws.onerror = ()=>toast("❌ Ошибка соединения");
-}
-
-function disconnectWS() {
-  currentGameId=null; currentGame=null;
+function connectWS(gameId){
   if(ws){ws.onclose=null;ws.close();ws=null;}
+  currentGameId=gameId;
+  const uid=String(tgUser.id),uname=encodeURIComponent(tgUser.first_name);
+  ws=new WebSocket(`${SERVER_WS}/ws/${gameId}/${uid}/${uname}`);
+  ws.onopen=()=>console.log("WS ok");
+  ws.onmessage=e=>handleServerMsg(JSON.parse(e.data));
+  ws.onclose=()=>{if(currentGameId)toast("⚠️ Соединение прервано");};
+  ws.onerror=()=>toast("❌ Ошибка соединения");
 }
+function disconnectWS(){currentGameId=null;currentGame=null;if(ws){ws.onclose=null;ws.close();ws=null;}}
+function sendWS(msg){if(ws&&ws.readyState===1)ws.send(JSON.stringify(msg));}
 
-function sendWS(msg) { if(ws&&ws.readyState===1) ws.send(JSON.stringify(msg)); }
-
-// ══ СОЗДАНИЕ / ВХОД ══
-function makeGameId(type) { return type+"_"+Math.random().toString(36).substr(2,8); }
-
-function createGame() {
-  const gid = makeGameId(currentGameType);
-  document.getElementById("waiting-code").textContent = gid;
-  showScreen("waiting");
-  connectWS(gid);
-}
-
-function joinGame() {
-  const code = document.getElementById("join-code").value.trim();
+function makeGameId(type){return type+"_"+Math.random().toString(36).substr(2,8);}
+function createGame(){const gid=makeGameId(currentGameType);document.getElementById("waiting-code").textContent=gid;showScreen("waiting");connectWS(gid);}
+function joinGame(){
+  const code=document.getElementById("join-code").value.trim();
   if(!code){toast("Введи код!");return;}
   const ct=code.split("_")[0];
   if(["ttt","rps","checkers","dice"].includes(ct)) currentGameType=ct;
-  connectWS(code);
-  document.getElementById("waiting-code").textContent=code;
-  showScreen("waiting");
+  connectWS(code);document.getElementById("waiting-code").textContent=code;showScreen("waiting");
 }
-
-function copyCode() { navigator.clipboard.writeText(document.getElementById("waiting-code").textContent).catch(()=>{}); toast("📋 Код скопирован!"); }
-function leaveGame() { disconnectWS(); goHome(); }
-function surrender() { if(!confirm("Сдаться?"))return; sendWS({type:"surrender"}); }
+function copyCode(){navigator.clipboard.writeText(document.getElementById("waiting-code").textContent).catch(()=>{});toast("📋 Код скопирован!");}
+function leaveGame(){disconnectWS();goHome();}
+function surrender(){if(!confirm("Сдаться?"))return;sendWS({type:"surrender"});}
 
 // ══ СООБЩЕНИЯ СЕРВЕРА ══
-function handleServerMsg(msg) {
-  if(msg.type==="game_state") {
-    const prev = currentGame;
-    currentGame = msg.game;
-    const myid = String(tgUser.id);
-
-    // ── СОХРАНЯЕМ СОПЕРНИКА КАК ТОЛЬКО ОН ПОДКЛЮЧИЛСЯ ──
-    if(currentGame.player2) {
-      const opp = String(currentGame.player1.id)===myid ? currentGame.player2 : currentGame.player1;
-      savedOpponent = {id: opp.id, name: opp.name};
-    }
-
+function handleServerMsg(msg){
+  if(msg.type==="game_state"){
+    const prev=currentGame; currentGame=msg.game;
     if(currentGame.status==="waiting"){showScreen("waiting");return;}
     if(!prev||prev.status==="waiting") startGameScreen();
     renderGame();
     if(currentGame.status==="finished"&&(!prev||prev.status!=="finished")) showResult();
   }
-  else if(msg.type==="chat") {
+  else if(msg.type==="rematch_start"){
+    // Сервер запустил реванш — сбрасываем экран и начинаем
+    currentGame=msg.game;
+    document.getElementById("rematch-notify").classList.add("hidden");
+    startGameScreen();
+    renderGame();
+    toast("🔄 Реванш начался!");
+  }
+  else if(msg.type==="rematch_requested"){
+    // Соперник хочет реванш — показываем уведомление
+    const myid=String(tgUser.id);
+    if(msg.from_id!==myid){
+      document.getElementById("rematch-notify-text").textContent=`🔄 ${msg.from_name} хочет реванш!`;
+      document.getElementById("rematch-notify").classList.remove("hidden");
+    }
+  }
+  else if(msg.type==="chat"){
     if(msg.entry.user_id!==String(tgUser.id)) addChatMsg(msg.entry.from,msg.entry.text,false);
   }
-  else if(msg.type==="rps_chose") {
+  else if(msg.type==="rps_chose"){
     if(msg.user_id!==String(tgUser.id)) toast("👀 Соперник выбрал оружие!");
   }
-  else if(msg.type==="opponent_left") {
+  else if(msg.type==="opponent_left"){
     toast("🚪 "+msg.message);
-    // НЕ сбрасываем savedOpponent — можно всё равно предложить реванш через бота
   }
 }
 
-function startGameScreen() {
+function startGameScreen(){
   const t=currentGame.type; currentGameType=t;
   document.getElementById("active-game-title").textContent=GAME_ICONS[t]+" "+GAME_NAMES[t];
   ["ttt","rps","checkers","dice"].forEach(g=>document.getElementById(g+"-area").classList.add("hidden"));
   document.getElementById(t+"-area").classList.remove("hidden");
   document.getElementById("result-box").classList.add("hidden");
+  document.getElementById("rematch-notify").classList.add("hidden");
   document.getElementById("chat-messages").innerHTML="";
   rpsChoice=null; diceGuess=null;
+  // Сбрасываем кнопку реванша
+  const rb=document.getElementById("rematch-btn");
+  rb.disabled=false; rb.style.opacity="1"; rb.textContent="🔄 Реванш";
+  document.getElementById("rematch-waiting").classList.add("hidden");
+  const rpsBtn=document.getElementById("rps-ready-btn");
+  rpsBtn.textContent="✅ Готов!"; rpsBtn.disabled=false; rpsBtn.style.opacity="1";
   showScreen("game");
 }
 
-// ══ РЕНДЕР ══
-function renderGame() {
+function renderGame(){
   if(!currentGame)return;
   const t=currentGame.type;
   if(t==="ttt") renderTTT();
@@ -596,8 +489,8 @@ function renderGame() {
   else if(t==="dice") renderDice();
 }
 
-function showResult() {
-  const g=currentGame, myid=String(tgUser.id);
+function showResult(){
+  const g=currentGame,myid=String(tgUser.id);
   let icon,text,sub;
   if(g.surrender&&g.winner!==myid){icon="🏳️";text="Ты сдался";sub="Лучше в следующий раз!";}
   else if(g.winner==="draw"){icon="🤝";text="Ничья!";sub="Равная игра";}
@@ -606,26 +499,20 @@ function showResult() {
   document.getElementById("result-icon").textContent=icon;
   document.getElementById("result-text").textContent=text;
   document.getElementById("result-sub").textContent=sub;
-  document.getElementById("rematch-status").textContent="";
-  const btn=document.getElementById("rematch-btn");
-  btn.disabled=false; btn.style.opacity="1";
-  // Показываем имя соперника в кнопке реванша
-  if(savedOpponent) btn.textContent=`🔄 Реванш с ${savedOpponent.name}`;
-  else btn.textContent="🔄 Реванш";
   document.getElementById("result-box").classList.remove("hidden");
   ["ttt","rps","checkers","dice"].forEach(t=>document.getElementById(t+"-area").classList.add("hidden"));
   document.getElementById("game-status").textContent="";
 }
 
 // ── TTT ──
-function renderTTT() {
+function renderTTT(){
   const g=currentGame,myid=String(tgUser.id);
   const myTurn=g.current===myid&&g.status==="playing";
   const mySym=String(g.player1.id)===myid?"X":"O";
   document.getElementById("game-status").innerHTML=g.status==="playing"?(myTurn?`<b>Твой ход (${mySym==="X"?"❌":"⭕"})</b>`:"Ход соперника..."):"";
-  const board=document.getElementById("ttt-board"); board.innerHTML="";
+  const board=document.getElementById("ttt-board");board.innerHTML="";
   g.board.forEach((cell,i)=>{
-    const d=document.createElement("div"); d.className="ttt-cell";
+    const d=document.createElement("div");d.className="ttt-cell";
     d.textContent=cell==="X"?"❌":(cell==="O"?"⭕":"");
     if(cell===" "&&myTurn) d.onclick=()=>sendWS({type:"ttt_move",cell:i});
     board.appendChild(d);
@@ -633,27 +520,26 @@ function renderTTT() {
 }
 
 // ── RPS ──
-function renderRPS() { if(currentGame.status==="playing") document.getElementById("game-status").textContent="Выбери оружие и нажми Готов!"; }
-function rpsChoose(c) {
-  rpsChoice=c; sendWS({type:"rps_choose",choice:c});
+function renderRPS(){if(currentGame.status==="playing") document.getElementById("game-status").textContent="Выбери оружие и нажми Готов!";}
+function rpsChoose(c){
+  rpsChoice=c;sendWS({type:"rps_choose",choice:c});
   ["rock","scissors","paper"].forEach(k=>document.getElementById("rps-"+k).classList.toggle("selected",k===c));
   toast({rock:"✊ Камень",scissors:"✌️ Ножницы",paper:"✋ Бумага"}[c]);
 }
-function rpsReady() {
+function rpsReady(){
   if(!rpsChoice){toast("Выбери оружие!");return;}
   sendWS({type:"rps_ready"});
-  const b=document.getElementById("rps-ready-btn");
-  b.textContent="⏳ Ждём соперника..."; b.disabled=true; b.style.opacity=".6";
+  const b=document.getElementById("rps-ready-btn");b.textContent="⏳ Ждём...";b.disabled=true;b.style.opacity=".6";
 }
 
 // ── CHECKERS ──
 const P={red:"🔴",red_king:"👑",white:"⚪",white_king:"💎"};
-function renderCheckers() {
+function renderCheckers(){
   const g=currentGame,myid=String(tgUser.id);
   const myC=String(g.player1.id)===myid?"red":"white";
   const myTurn=g.current_color===myC&&g.status==="playing";
   const sel=g.selected;
-  document.getElementById("game-status").innerHTML=g.status==="playing"?(myTurn?"<b>Твой ход</b> — выбери шашку":"Ход соперника..."):"";
+  document.getElementById("game-status").innerHTML=g.status==="playing"?(myTurn?"<b>Твой ход</b>":"Ход соперника..."):"";
   let tgts=new Set(),caps=new Set();
   if(myTurn&&sel!==null&&g.board[sel]){
     const ac=getAllCaps(g.board,myC),mc=ac.length>0;
@@ -661,11 +547,10 @@ function renderCheckers() {
     if(pc.length) pc.forEach(([,t])=>caps.add(t));
     else if(!mc) getMvs(g.board,sel,g.board[sel]).forEach(t=>tgts.add(t));
   }
-  const board=document.getElementById("checkers-board"); board.innerHTML="";
+  const board=document.getElementById("checkers-board");board.innerHTML="";
   for(let i=0;i<64;i++){
     const r=i>>3,c=i&7;
-    const cell=document.createElement("div");
-    cell.className="ch-cell "+((r+c)%2===0?"ch-light":"ch-dark");
+    const cell=document.createElement("div");cell.className="ch-cell "+((r+c)%2===0?"ch-light":"ch-dark");
     const piece=g.board[i];
     if(sel===i) cell.classList.add("sel");
     else if(caps.has(i)) cell.classList.add("capture");
@@ -689,10 +574,8 @@ function getMvs(b,pos,p){if(!p)return[];const r=[],row=pos>>3,col=pos&7;if(p.kin
 function renderDice(){
   const g=currentGame,myid=String(tgUser.id),p1id=String(g.player1.id);
   const isP1=myid===p1id,gr=g.guesser_role,imG=(isP1&&gr==="p1")||(!isP1&&gr==="p2"),imT=!imG;
-  document.getElementById("dice-s1").textContent=g.scores.p1;
-  document.getElementById("dice-s2").textContent=g.scores.p2;
-  document.getElementById("dice-n1").textContent=g.player1.name;
-  document.getElementById("dice-n2").textContent=g.player2?.name||"?";
+  document.getElementById("dice-s1").textContent=g.scores.p1;document.getElementById("dice-s2").textContent=g.scores.p2;
+  document.getElementById("dice-n1").textContent=g.player1.name;document.getElementById("dice-n2").textContent=g.player2?.name||"?";
   document.getElementById("dice-phase-title").textContent=`Раунд ${g.round} из 2`;
   const DA=document.getElementById("dice-guess-area"),DT=document.getElementById("dice-throw-area"),DW=document.getElementById("dice-wait-area");
   if(g.status==="finished"){DA.classList.add("hidden");DT.classList.add("hidden");DW.classList.remove("hidden");document.getElementById("dice-wait-msg").textContent="Игра завершена!";document.getElementById("game-status").textContent="";return;}
@@ -712,19 +595,8 @@ function diceConfirmGuess(){if(!diceGuess){toast("Выбери число!");ret
 function diceThrow(){const b=document.getElementById("dice-throw-btn");b.disabled=true;b.style.opacity=".5";sendWS({type:"dice_throw"});}
 
 // ══ ЧАТ ══
-function sendChat(){
-  const inp=document.getElementById("chat-input"),text=inp.value.trim();
-  if(!text)return;
-  addChatMsg(tgUser.first_name,text,true);
-  sendWS({type:"chat",text,user_id:String(tgUser.id)});
-  inp.value="";
-}
-function addChatMsg(from,text,isMe=false){
-  const c=document.getElementById("chat-messages");
-  const d=document.createElement("div");d.className="chat-msg";
-  d.innerHTML=`<span class="chat-from ${isMe?"me":""}">${from}:</span> ${text}`;
-  c.appendChild(d);c.scrollTop=c.scrollHeight;
-}
+function sendChat(){const inp=document.getElementById("chat-input"),text=inp.value.trim();if(!text)return;addChatMsg(tgUser.first_name,text,true);sendWS({type:"chat",text,user_id:String(tgUser.id)});inp.value="";}
+function addChatMsg(from,text,isMe=false){const c=document.getElementById("chat-messages");const d=document.createElement("div");d.className="chat-msg";d.innerHTML=`<span class="chat-from ${isMe?"me":""}">${from}:</span> ${text}`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
 document.getElementById("chat-input").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
 
 // ══ ТОСТ ══
