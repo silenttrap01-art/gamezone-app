@@ -72,25 +72,39 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
 .result-icon{font-size:52px;margin-bottom:10px}
 .result-text{font-size:20px;font-weight:700;margin-bottom:6px}
 .result-sub{font-size:13px;color:#9999cc;margin-bottom:14px}
-
-/* РЕВАНШ НОТИФИКАЦИЯ */
 .rematch-notify{background:#1e2a1e;border:1px solid #27ae60;border-radius:14px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
 .rematch-notify-text{flex:1;font-size:14px;color:#4ade80}
 .rematch-accept-btn{background:#27ae60;border:none;border-radius:10px;padding:10px 16px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
-
 .ttt-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
 .ttt-cell{background:#1a1a2e;border-radius:14px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer;border:1px solid #2a2a4a;transition:all .15s}
 .ttt-cell:active{background:#2a2a4a;transform:scale(.95)}
+
+/* ══ КНБ АНИМАЦИЯ ══ */
 .rps-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
 .rps-btn{background:#1a1a2e;border:2px solid #2a2a4a;border-radius:18px;padding:20px 10px;font-size:42px;cursor:pointer;transition:all .2s;text-align:center}
 .rps-btn:active{transform:scale(.93)}
 .rps-btn.selected{border-color:#5b5ef4;background:#1e1e3a}
 .rps-label{font-size:11px;color:#6666aa;text-align:center;margin-top:4px}
+
+/* Экран раскрытия КНБ */
+.rps-reveal-box{background:#1a1a2e;border-radius:16px;padding:20px;text-align:center;margin-bottom:14px}
+.rps-reveal-vs{display:flex;align-items:center;justify-content:space-around;margin:16px 0}
+.rps-reveal-player{display:flex;flex-direction:column;align-items:center;gap:8px}
+.rps-reveal-name{font-size:13px;color:#9999cc}
+.rps-reveal-emoji{font-size:56px;transition:all .3s}
+.rps-reveal-emoji.hidden-choice{filter:blur(8px);transform:scale(.8)}
+.rps-reveal-emoji.shown{filter:none;transform:scale(1)}
+.rps-reveal-result{font-size:20px;font-weight:700;margin-top:12px;opacity:0;transition:opacity .5s}
+.rps-reveal-result.show{opacity:1}
+.rps-vs-text{font-size:24px;color:#6666aa;font-weight:700}
+
+/* ══ КОСТИ АНИМАЦИЯ ══ */
 .checkers-wrap{border-radius:12px;overflow:hidden;margin-bottom:14px;border:2px solid #2a2a4a}
 .checkers-board{display:grid;grid-template-columns:repeat(8,1fr)}
 .ch-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:clamp(14px,3.5vw,22px)}
 .ch-light{background:#2a2a5a}.ch-dark{background:#1a1a2e}
 .ch-cell.sel{background:#3a5a2a!important}.ch-cell.target{background:#2a4a1a!important}.ch-cell.capture{background:#5a2a1a!important}
+
 .dice-score-bar{display:flex;background:#1a1a2e;border-radius:14px;padding:14px;margin-bottom:14px}
 .dice-score-item{flex:1;text-align:center}
 .dice-score-val{font-size:28px;font-weight:700;color:#5b5ef4}
@@ -99,11 +113,50 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
 .dice-num-btn{background:#1a1a2e;border:2px solid #2a2a4a;border-radius:12px;padding:14px 8px;font-size:16px;font-weight:700;cursor:pointer;text-align:center;color:#e0e0ff;transition:all .15s}
 .dice-num-btn:active{transform:scale(.93)}
 .dice-num-btn.selected{background:#1e1e3a;border-color:#5b5ef4;color:#5b5ef4}
-.dice-display{display:flex;justify-content:center;gap:20px;margin:20px 0;font-size:56px}
-.dice-log-row{font-size:13px;padding:6px 0;border-bottom:1px solid #1e1e3a;color:#9999cc}
+
+/* КУБИКИ */
+.dice-container{display:flex;justify-content:center;gap:20px;margin:16px 0}
+.die{width:72px;height:72px;background:#1a1a2e;border:2px solid #3a3a6a;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:48px;transition:transform .1s;position:relative;overflow:hidden}
+.die.rolling{animation:diceRoll .8s ease-in-out}
+@keyframes diceRoll{
+  0%{transform:rotate(0deg) scale(1)}
+  15%{transform:rotate(-20deg) scale(1.1)}
+  30%{transform:rotate(15deg) scale(0.95)}
+  45%{transform:rotate(-10deg) scale(1.05)}
+  60%{transform:rotate(8deg) scale(0.98)}
+  75%{transform:rotate(-5deg) scale(1.02)}
+  90%{transform:rotate(2deg) scale(1)}
+  100%{transform:rotate(0deg) scale(1)}
+}
+.die.bounce{animation:dieBounce .4s ease-out}
+@keyframes dieBounce{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.3)}
+  70%{transform:scale(0.9)}
+  100%{transform:scale(1)}
+}
+
+.dice-result-row{display:flex;align-items:center;justify-content:center;gap:12px;margin:8px 0;font-size:15px}
+.dice-result-total{font-size:28px;font-weight:700;color:#e0e0ff}
+.dice-result-hit{color:#4ade80;font-size:22px}
+.dice-result-miss{color:#f45b5b;font-size:22px}
+
+.dice-log-box{background:#0f0f1a;border-radius:12px;padding:12px;margin-top:12px}
+.dice-log-row{font-size:13px;padding:5px 0;border-bottom:1px solid #1e1e3a;color:#9999cc;display:flex;align-items:center;gap:8px}
+.dice-log-row:last-child{border-bottom:none}
+.dice-log-faces{font-size:18px}
+
+.dice-throw-btn{width:100%;background:#e67e22;border:none;border-radius:14px;padding:16px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:all .15s;margin-top:8px}
+.dice-throw-btn:active{transform:scale(.97)}
+.dice-throw-btn:disabled{opacity:.5;cursor:not-allowed}
+
+.dice-wait-box{text-align:center;padding:20px;color:#9999cc;font-size:14px}
+.dice-secret-reveal{background:#1e2a1e;border-radius:12px;padding:14px;text-align:center;margin-top:10px}
+.dice-secret-num{font-size:42px;font-weight:700;color:#4ade80}
+
 .chat-wrap{background:#1a1a2e;border-radius:14px;padding:14px;margin-top:14px}
 .chat-title{font-size:11px;color:#6666aa;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.chat-messages{max-height:130px;overflow-y:auto;margin-bottom:10px}
+.chat-messages{max-height:120px;overflow-y:auto;margin-bottom:10px}
 .chat-msg{font-size:13px;padding:4px 0;border-bottom:1px solid #1e1e3a;line-height:1.4}
 .chat-msg:last-child{border-bottom:none}
 .chat-from{color:#5b5ef4;font-weight:600}
@@ -223,13 +276,11 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
   <div class="game-body">
     <div class="status-bar" id="game-status">Загрузка...</div>
 
-    <!-- РЕВАНШ УВЕДОМЛЕНИЕ -->
     <div class="rematch-notify hidden" id="rematch-notify">
       <div class="rematch-notify-text" id="rematch-notify-text">🔄 Соперник хочет реванш!</div>
       <button class="rematch-accept-btn" onclick="acceptRematch()">Принять!</button>
     </div>
 
-    <!-- РЕЗУЛЬТАТ -->
     <div class="result-box hidden" id="result-box">
       <div class="result-icon" id="result-icon">🏆</div>
       <div class="result-text" id="result-text"></div>
@@ -239,22 +290,50 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
       <button class="btn btn-secondary" onclick="goHome()" style="margin-top:10px">🏠 На главную</button>
     </div>
 
+    <!-- TTT -->
     <div id="ttt-area" class="hidden"><div class="ttt-board" id="ttt-board"></div></div>
+
+    <!-- КНБ -->
     <div id="rps-area" class="hidden">
-      <div style="text-align:center;font-size:13px;color:#9999cc;margin-bottom:4px">Выбери оружие:</div>
-      <div class="rps-choices">
-        <div onclick="rpsChoose('rock')"><div class="rps-btn" id="rps-rock">✊</div><div class="rps-label">Камень</div></div>
-        <div onclick="rpsChoose('scissors')"><div class="rps-btn" id="rps-scissors">✌️</div><div class="rps-label">Ножницы</div></div>
-        <div onclick="rpsChoose('paper')"><div class="rps-btn" id="rps-paper">✋</div><div class="rps-label">Бумага</div></div>
+      <!-- Выбор -->
+      <div id="rps-choose-section">
+        <div style="text-align:center;font-size:13px;color:#9999cc;margin-bottom:4px">Выбери оружие:</div>
+        <div class="rps-choices">
+          <div onclick="rpsChoose('rock')"><div class="rps-btn" id="rps-rock">✊</div><div class="rps-label">Камень</div></div>
+          <div onclick="rpsChoose('scissors')"><div class="rps-btn" id="rps-scissors">✌️</div><div class="rps-label">Ножницы</div></div>
+          <div onclick="rpsChoose('paper')"><div class="rps-btn" id="rps-paper">✋</div><div class="rps-label">Бумага</div></div>
+        </div>
+        <button class="btn btn-success" id="rps-ready-btn" onclick="rpsReady()">✅ Готов!</button>
       </div>
-      <button class="btn btn-success" id="rps-ready-btn" onclick="rpsReady()">✅ Готов!</button>
+      <!-- Раскрытие -->
+      <div id="rps-reveal-section" class="hidden">
+        <div class="rps-reveal-box">
+          <div style="font-size:13px;color:#9999cc;margin-bottom:4px" id="rps-reveal-header">Раскрываем...</div>
+          <div class="rps-reveal-vs">
+            <div class="rps-reveal-player">
+              <div class="rps-reveal-name" id="rps-p1-name">Игрок 1</div>
+              <div class="rps-reveal-emoji hidden-choice" id="rps-p1-reveal">❓</div>
+            </div>
+            <div class="rps-vs-text">VS</div>
+            <div class="rps-reveal-player">
+              <div class="rps-reveal-name" id="rps-p2-name">Игрок 2</div>
+              <div class="rps-reveal-emoji hidden-choice" id="rps-p2-reveal">❓</div>
+            </div>
+          </div>
+          <div class="rps-reveal-result" id="rps-reveal-result"></div>
+        </div>
+      </div>
     </div>
+
+    <!-- ШАШКИ -->
     <div id="checkers-area" class="hidden">
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:#6666aa">
         <span>🔴 Твои</span><span>⚪ Соперник</span><span>👑 Дамка кр.</span><span>💎 Дамка бел.</span><span>🟢 Ход</span><span>💥 Бить!</span>
       </div>
       <div class="checkers-wrap"><div class="checkers-board" id="checkers-board"></div></div>
     </div>
+
+    <!-- КОСТИ -->
     <div id="dice-area" class="hidden">
       <div class="dice-score-bar">
         <div class="dice-score-item"><div class="dice-score-val" id="dice-s1">0</div><div class="dice-score-name" id="dice-n1">Игрок 1</div></div>
@@ -263,11 +342,45 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
       </div>
       <div style="background:#1a1a2e;border-radius:14px;padding:16px;margin-bottom:14px">
         <div style="font-size:14px;font-weight:600;margin-bottom:12px" id="dice-phase-title">Раунд 1 из 2</div>
-        <div id="dice-guess-area"><div style="font-size:13px;color:#9999cc;margin-bottom:10px">Загадай число:</div><div class="dice-numbers" id="dice-numbers"></div><button class="btn btn-primary" onclick="diceConfirmGuess()">🤫 Загадать!</button></div>
-        <div id="dice-throw-area" class="hidden"><div class="dice-display" id="dice-display">🎲 🎲</div><button class="btn btn-warning" id="dice-throw-btn" onclick="diceThrow()">🎲 Бросить кости!</button><div id="dice-log" style="margin-top:12px"></div></div>
-        <div id="dice-wait-area" class="hidden"><div style="text-align:center;padding:20px;color:#9999cc;font-size:14px" id="dice-wait-msg">⏳ Ждём...</div></div>
+
+        <!-- Загадать -->
+        <div id="dice-guess-area">
+          <div style="font-size:13px;color:#9999cc;margin-bottom:10px">Загадай число (соперник будет бросать):</div>
+          <div class="dice-numbers" id="dice-numbers"></div>
+          <button class="btn btn-primary" onclick="diceConfirmGuess()">🤫 Загадать!</button>
+        </div>
+
+        <!-- Бросить -->
+        <div id="dice-throw-area" class="hidden">
+          <div class="dice-container">
+            <div class="die" id="die1">🎲</div>
+            <div class="die" id="die2">🎲</div>
+          </div>
+          <div id="dice-last-result" style="text-align:center;min-height:36px"></div>
+          <button class="dice-throw-btn" id="dice-throw-btn" onclick="diceThrow()">🎲 Бросить кости!</button>
+          <div class="dice-log-box" id="dice-log" style="display:none"></div>
+        </div>
+
+        <!-- Ждать -->
+        <div id="dice-wait-area" class="hidden">
+          <div class="dice-wait-box" id="dice-wait-msg">⏳ Ждём...</div>
+          <div id="dice-secret-box" class="hidden">
+            <div class="dice-secret-reveal">
+              <div style="font-size:13px;color:#9999cc;margin-bottom:6px">🤫 Ты загадал:</div>
+              <div class="dice-secret-num" id="dice-secret-show">—</div>
+              <div style="font-size:12px;color:#6666aa;margin-top:4px">Соперник бросает...</div>
+            </div>
+            <!-- Кубики наблюдателя -->
+            <div class="dice-container" style="margin-top:14px">
+              <div class="die" id="die1-watch">🎲</div>
+              <div class="die" id="die2-watch">🎲</div>
+            </div>
+            <div class="dice-log-box" id="dice-log-watch" style="display:none"></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="chat-wrap">
       <div class="chat-title">💬 Чат</div>
       <div class="chat-messages" id="chat-messages"></div>
@@ -284,11 +397,15 @@ const SERVER_HTTP = "https://gamezone-server-production.up.railway.app";
 const SERVER_WS   = "wss://gamezone-server-production.up.railway.app";
 const GAME_NAMES  = {ttt:"Крестики-нолики",rps:"Камень-ножницы-бумага",checkers:"Шашки",dice:"Кости"};
 const GAME_ICONS  = {ttt:"✕○",rps:"✊",checkers:"⬛",dice:"🎲"};
+const DICE_FACES  = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
+const RPS_EMOJI   = {rock:"✊",scissors:"✌️",paper:"✋"};
+const RPS_LABEL   = {rock:"Камень",scissors:"Ножницы",paper:"Бумага"};
 
-let tgUser=null, ws=null;
-let currentGame=null, currentGameType=null, currentGameId=null;
-let rpsChoice=null, diceGuess=null, challengeTargetId=null;
-let friends=[], allUsers=[], friendIds=new Set();
+let tgUser=null,ws=null;
+let currentGame=null,currentGameType=null,currentGameId=null;
+let rpsChoice=null,diceGuess=null,challengeTargetId=null;
+let friends=[],allUsers=[],friendIds=new Set();
+let diceAnimating=false;
 
 try{window.Telegram.WebApp.ready();window.Telegram.WebApp.expand();tgUser=window.Telegram.WebApp.initDataUnsafe?.user;}catch(e){}
 if(!tgUser) tgUser={id:Date.now()%100000,first_name:"Игрок"+(Date.now()%100)};
@@ -302,7 +419,6 @@ if(joinParam){
 }
 loadData();
 
-// ══ НАВИГАЦИЯ ══
 function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById("screen-"+id).classList.add("active");}
 function goHome(){disconnectWS();showScreen("home");}
 function setNav(tab){["home","friends","rating"].forEach(t=>document.getElementById("nav-"+t)?.classList.toggle("active",t===tab));}
@@ -313,93 +429,66 @@ function switchHomeTab(tab){
 }
 function openLobby(type){currentGameType=type;document.getElementById("lobby-title").textContent=GAME_ICONS[type]+" "+GAME_NAMES[type];document.getElementById("join-code").value="";showScreen("lobby");}
 
-// ══ ДАННЫЕ ══
 async function loadData(){
   try{
     const[fr,all]=await Promise.all([
       fetch(`${SERVER_HTTP}/friends/${tgUser.id}`).then(r=>r.json()),
       fetch(`${SERVER_HTTP}/users`).then(r=>r.json())
     ]);
-    friends=fr||[]; allUsers=(all||[]).filter(u=>String(u.id)!==String(tgUser.id));
+    friends=fr||[];allUsers=(all||[]).filter(u=>String(u.id)!==String(tgUser.id));
     friendIds=new Set(friends.map(f=>String(f.id)));
   }catch(e){friends=[];allUsers=[];}
 }
 
-// ══ ДРУЗЬЯ ══
 function renderFriends(){
-  const fs=document.getElementById("friends-section");
-  const au=document.getElementById("all-users-section");
-  if(!friends.length){
-    fs.innerHTML=`<div style="text-align:center;padding:24px;color:#6666aa"><div style="font-size:36px;margin-bottom:10px">👥</div>Друзей пока нет. Добавь игроков ниже!</div>`;
-  }else{
-    fs.innerHTML=`<div class="section-title">Мои друзья (${friends.length})</div>`+
-      friends.map(f=>`<div class="friend-card">
-        <div class="friend-avatar">${(f.name||"?")[0]}</div>
-        <div class="friend-info"><div class="friend-name">${f.name}</div><div class="friend-stats">★ ${f.wins} побед · ${f.games} игр</div></div>
-        <button class="challenge-btn" onclick="openChallengeModal(${f.id})">⚔️ Вызов</button>
-      </div>`).join("");
-  }
+  const fs=document.getElementById("friends-section"),au=document.getElementById("all-users-section");
+  fs.innerHTML=!friends.length?`<div style="text-align:center;padding:24px;color:#6666aa"><div style="font-size:36px;margin-bottom:10px">👥</div>Друзей пока нет!</div>`:
+    `<div class="section-title">Мои друзья (${friends.length})</div>`+
+    friends.map(f=>`<div class="friend-card"><div class="friend-avatar">${(f.name||"?")[0]}</div><div class="friend-info"><div class="friend-name">${f.name}</div><div class="friend-stats">★ ${f.wins} побед · ${f.games} игр</div></div><button class="challenge-btn" onclick="openChallengeModal(${f.id})">⚔️ Вызов</button></div>`).join("");
   const others=allUsers.filter(u=>!friendIds.has(String(u.id)));
-  if(!others.length){au.innerHTML=`<div style="text-align:center;color:#6666aa;font-size:13px;padding:12px">Все игроки уже в друзьях!</div>`;}
-  else{au.innerHTML=others.map(u=>`<div class="user-card">
-    <div class="friend-avatar">${(u.name||"?")[0]}</div>
-    <div class="friend-info"><div class="friend-name">${u.name}</div><div class="friend-stats">★ ${u.wins} побед · ${u.games} игр</div></div>
-    <button class="add-btn" id="addbtn-${u.id}" onclick="addFriend(${u.id},'${u.name}',this)">+ Друг</button>
-  </div>`).join("");}
+  au.innerHTML=!others.length?`<div style="text-align:center;color:#6666aa;font-size:13px;padding:12px">Все игроки уже в друзьях!</div>`:
+    others.map(u=>`<div class="user-card"><div class="friend-avatar">${(u.name||"?")[0]}</div><div class="friend-info"><div class="friend-name">${u.name}</div><div class="friend-stats">★ ${u.wins} побед · ${u.games} игр</div></div><button class="add-btn" id="addbtn-${u.id}" onclick="addFriend(${u.id},'${u.name}',this)">+ Друг</button></div>`).join("");
 }
 
 async function addFriend(fid,fname,btn){
-  btn.className="added-btn"; btn.textContent="✓ Друг"; btn.disabled=true;
-  friendIds.add(String(fid)); friends.push({id:fid,name:fname,wins:0,games:0});
+  btn.className="added-btn";btn.textContent="✓ Друг";btn.disabled=true;
+  friendIds.add(String(fid));friends.push({id:fid,name:fname,wins:0,games:0});
   toast(`✅ ${fname} добавлен!`);
   try{await fetch(`${SERVER_HTTP}/add_friend`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({user_id:tgUser.id,friend_id:fid})});}catch(e){}
 }
 
-// ══ ВЫЗОВ ══
 function openChallengeModal(fid){challengeTargetId=fid;document.getElementById("challenge-modal").classList.remove("hidden");}
-
 async function sendChallenge(gameType){
   document.getElementById("challenge-modal").classList.add("hidden");
   if(!challengeTargetId) return;
   toast("⏳ Отправляем вызов...");
   try{
-    const res=await fetch(`${SERVER_HTTP}/challenge`,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({from_id:tgUser.id,to_id:challengeTargetId,game_type:gameType,from_name:tgUser.first_name})});
+    const res=await fetch(`${SERVER_HTTP}/challenge`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({from_id:tgUser.id,to_id:challengeTargetId,game_type:gameType,from_name:tgUser.first_name})});
     const data=await res.json();
     if(data.ok){currentGameType=gameType;connectWS(data.game_id);document.getElementById("waiting-code").textContent=data.game_id;showScreen("waiting");toast("✅ Вызов отправлен!");}
     else toast("❌ "+(data.error||"Ошибка"));
   }catch(e){toast("❌ Ошибка соединения");}
 }
 
-// ══ РЕВАНШ ══
 function requestRematch(){
-  // Отправляем запрос на реванш через тот же WebSocket
   sendWS({type:"rematch_request"});
   document.getElementById("rematch-btn").disabled=true;
   document.getElementById("rematch-btn").style.opacity=".5";
   document.getElementById("rematch-waiting").classList.remove("hidden");
   toast("⏳ Запрос на реванш отправлен...");
 }
+function acceptRematch(){sendWS({type:"rematch_accept"});document.getElementById("rematch-notify").classList.add("hidden");toast("✅ Принимаем реванш...");}
 
-function acceptRematch(){
-  sendWS({type:"rematch_accept"});
-  document.getElementById("rematch-notify").classList.add("hidden");
-  toast("✅ Принимаем реванш...");
-}
-
-// ══ РЕЙТИНГ ══
 let allUsersCache=[];
-async function loadRating(){try{allUsersCache=await fetch(`${SERVER_HTTP}/users`).then(r=>r.json());}catch(e){} switchRatingTab("all");}
+async function loadRating(){try{allUsersCache=await fetch(`${SERVER_HTTP}/users`).then(r=>r.json());}catch(e){}switchRatingTab("all");}
 function switchRatingTab(tab){
   ["all","ttt","rps","checkers","dice"].forEach(t=>document.getElementById("rtab-"+t)?.classList.toggle("active",t===tab));
   const data=[...allUsersCache].sort((a,b)=>b.wins-a.wins).slice(0,10);
-  const medals=["g","s","b"];
-  const list=document.getElementById("rating-list");
+  const medals=["g","s","b"],list=document.getElementById("rating-list");
   if(!data.length){list.innerHTML=`<div class="lb-row" style="justify-content:center;color:#6666aa">Нет данных</div>`;return;}
   list.innerHTML=data.map((u,i)=>`<div class="lb-row"><div class="lb-rank ${medals[i]||""}">${i+1}</div><div class="lb-name">${u.name}</div><div class="lb-score">★ ${u.wins}</div></div>`).join("");
 }
 
-// ══ WEBSOCKET ══
 function connectWS(gameId){
   if(ws){ws.onclose=null;ws.close();ws=null;}
   currentGameId=gameId;
@@ -412,7 +501,6 @@ function connectWS(gameId){
 }
 function disconnectWS(){currentGameId=null;currentGame=null;if(ws){ws.onclose=null;ws.close();ws=null;}}
 function sendWS(msg){if(ws&&ws.readyState===1)ws.send(JSON.stringify(msg));}
-
 function makeGameId(type){return type+"_"+Math.random().toString(36).substr(2,8);}
 function createGame(){const gid=makeGameId(currentGameType);document.getElementById("waiting-code").textContent=gid;showScreen("waiting");connectWS(gid);}
 function joinGame(){
@@ -426,27 +514,36 @@ function copyCode(){navigator.clipboard.writeText(document.getElementById("waiti
 function leaveGame(){disconnectWS();goHome();}
 function surrender(){if(!confirm("Сдаться?"))return;sendWS({type:"surrender"});}
 
-// ══ СООБЩЕНИЯ СЕРВЕРА ══
+// ══ СООБЩЕНИЯ ══
 function handleServerMsg(msg){
   if(msg.type==="game_state"){
-    const prev=currentGame; currentGame=msg.game;
+    const prev=currentGame;currentGame=msg.game;
     if(currentGame.status==="waiting"){showScreen("waiting");return;}
     if(!prev||prev.status==="waiting") startGameScreen();
-    renderGame();
+
+    // Для костей — анимируем новый бросок
+    if(currentGame.type==="dice" && prev && currentGame.round_log.length > (prev.round_log||[]).length){
+      const lastRoll=currentGame.round_log[currentGame.round_log.length-1];
+      animateDiceRoll(lastRoll.d1,lastRoll.d2,lastRoll.total);
+    } else {
+      renderGame();
+    }
+
+    // КНБ — раскрытие
+    if(currentGame.type==="rps" && currentGame.status==="finished" && currentGame.result){
+      if(!prev||prev.status!=="finished") showRpsReveal(currentGame.result);
+      return;
+    }
+
     if(currentGame.status==="finished"&&(!prev||prev.status!=="finished")) showResult();
   }
   else if(msg.type==="rematch_start"){
-    // Сервер запустил реванш — сбрасываем экран и начинаем
     currentGame=msg.game;
     document.getElementById("rematch-notify").classList.add("hidden");
-    startGameScreen();
-    renderGame();
-    toast("🔄 Реванш начался!");
+    startGameScreen();renderGame();toast("🔄 Реванш начался!");
   }
   else if(msg.type==="rematch_requested"){
-    // Соперник хочет реванш — показываем уведомление
-    const myid=String(tgUser.id);
-    if(msg.from_id!==myid){
+    if(msg.from_id!==String(tgUser.id)){
       document.getElementById("rematch-notify-text").textContent=`🔄 ${msg.from_name} хочет реванш!`;
       document.getElementById("rematch-notify").classList.remove("hidden");
     }
@@ -455,28 +552,29 @@ function handleServerMsg(msg){
     if(msg.entry.user_id!==String(tgUser.id)) addChatMsg(msg.entry.from,msg.entry.text,false);
   }
   else if(msg.type==="rps_chose"){
-    if(msg.user_id!==String(tgUser.id)) toast("👀 Соперник выбрал оружие!");
+    if(msg.user_id!==String(tgUser.id)) toast("👀 Соперник сделал выбор!");
   }
-  else if(msg.type==="opponent_left"){
-    toast("🚪 "+msg.message);
-  }
+  else if(msg.type==="opponent_left") toast("🚪 "+msg.message);
 }
 
 function startGameScreen(){
-  const t=currentGame.type; currentGameType=t;
+  const t=currentGame.type;currentGameType=t;
   document.getElementById("active-game-title").textContent=GAME_ICONS[t]+" "+GAME_NAMES[t];
   ["ttt","rps","checkers","dice"].forEach(g=>document.getElementById(g+"-area").classList.add("hidden"));
   document.getElementById(t+"-area").classList.remove("hidden");
   document.getElementById("result-box").classList.add("hidden");
   document.getElementById("rematch-notify").classList.add("hidden");
   document.getElementById("chat-messages").innerHTML="";
-  rpsChoice=null; diceGuess=null;
-  // Сбрасываем кнопку реванша
-  const rb=document.getElementById("rematch-btn");
-  rb.disabled=false; rb.style.opacity="1"; rb.textContent="🔄 Реванш";
+  rpsChoice=null;diceGuess=null;diceAnimating=false;
+  const rb=document.getElementById("rematch-btn");rb.disabled=false;rb.style.opacity="1";rb.textContent="🔄 Реванш";
   document.getElementById("rematch-waiting").classList.add("hidden");
-  const rpsBtn=document.getElementById("rps-ready-btn");
-  rpsBtn.textContent="✅ Готов!"; rpsBtn.disabled=false; rpsBtn.style.opacity="1";
+  // Сброс КНБ
+  if(t==="rps"){
+    document.getElementById("rps-choose-section").classList.remove("hidden");
+    document.getElementById("rps-reveal-section").classList.add("hidden");
+    const b=document.getElementById("rps-ready-btn");b.textContent="✅ Готов!";b.disabled=false;b.style.opacity="1";
+    ["rock","scissors","paper"].forEach(k=>document.getElementById("rps-"+k).classList.remove("selected"));
+  }
   showScreen("game");
 }
 
@@ -519,26 +617,77 @@ function renderTTT(){
   });
 }
 
-// ── RPS ──
-function renderRPS(){if(currentGame.status==="playing") document.getElementById("game-status").textContent="Выбери оружие и нажми Готов!";}
+// ── КНБ ──
+function renderRPS(){
+  if(currentGame.status==="playing") document.getElementById("game-status").textContent="Выбери оружие и нажми Готов!";
+}
 function rpsChoose(c){
   rpsChoice=c;sendWS({type:"rps_choose",choice:c});
   ["rock","scissors","paper"].forEach(k=>document.getElementById("rps-"+k).classList.toggle("selected",k===c));
-  toast({rock:"✊ Камень",scissors:"✌️ Ножницы",paper:"✋ Бумага"}[c]);
+  toast(RPS_EMOJI[c]+" "+RPS_LABEL[c]);
 }
 function rpsReady(){
   if(!rpsChoice){toast("Выбери оружие!");return;}
   sendWS({type:"rps_ready"});
-  const b=document.getElementById("rps-ready-btn");b.textContent="⏳ Ждём...";b.disabled=true;b.style.opacity=".6";
+  const b=document.getElementById("rps-ready-btn");b.textContent="⏳ Ждём соперника...";b.disabled=true;b.style.opacity=".6";
 }
 
-// ── CHECKERS ──
+// КНБ АНИМАЦИЯ РАСКРЫТИЯ
+function showRpsReveal(result){
+  const g=currentGame,myid=String(tgUser.id);
+  const p1=g.player1,p2=g.player2||{name:"?"};
+
+  document.getElementById("rps-choose-section").classList.add("hidden");
+  document.getElementById("rps-reveal-section").classList.remove("hidden");
+  document.getElementById("game-status").textContent="";
+
+  document.getElementById("rps-p1-name").textContent=p1.name;
+  document.getElementById("rps-p2-name").textContent=p2.name;
+
+  const p1emoji=document.getElementById("rps-p1-reveal");
+  const p2emoji=document.getElementById("rps-p2-reveal");
+  const resEl=document.getElementById("rps-reveal-result");
+
+  // Начинаем с закрытых
+  p1emoji.textContent="❓"; p1emoji.className="rps-reveal-emoji hidden-choice";
+  p2emoji.textContent="❓"; p2emoji.className="rps-reveal-emoji hidden-choice";
+  resEl.className="rps-reveal-result";
+  document.getElementById("rps-reveal-header").textContent="3... 2... 1...";
+
+  // Раскрываем с задержкой
+  setTimeout(()=>{
+    document.getElementById("rps-reveal-header").textContent="Раскрываем! 👀";
+    // Раскрываем п1
+    p1emoji.textContent=RPS_EMOJI[result.c1]||"?";
+    p1emoji.className="rps-reveal-emoji shown";
+  },800);
+
+  setTimeout(()=>{
+    // Раскрываем п2
+    p2emoji.textContent=RPS_EMOJI[result.c2]||"?";
+    p2emoji.className="rps-reveal-emoji shown";
+  },1400);
+
+  setTimeout(()=>{
+    // Показываем результат
+    let resText="",resClass="";
+    if(result.winner==="draw"){resText="🤝 Ничья!";resClass="draw-c";}
+    else if(result.winner===myid){resText="🏆 Победа!";resClass="win";}
+    else{resText="😢 Поражение";resClass="lose";}
+    resEl.textContent=resText;
+    resEl.style.color=resClass==="win"?"#4ade80":resClass==="lose"?"#f45b5b":"#ffd700";
+    resEl.className="rps-reveal-result show";
+    document.getElementById("rps-reveal-header").textContent=p1.name+" vs "+p2.name;
+    setTimeout(()=>showResult(),1200);
+  },2000);
+}
+
+// ── ШАШКИ ──
 const P={red:"🔴",red_king:"👑",white:"⚪",white_king:"💎"};
 function renderCheckers(){
   const g=currentGame,myid=String(tgUser.id);
   const myC=String(g.player1.id)===myid?"red":"white";
-  const myTurn=g.current_color===myC&&g.status==="playing";
-  const sel=g.selected;
+  const myTurn=g.current_color===myC&&g.status==="playing",sel=g.selected;
   document.getElementById("game-status").innerHTML=g.status==="playing"?(myTurn?"<b>Твой ход</b>":"Ход соперника..."):"";
   let tgts=new Set(),caps=new Set();
   if(myTurn&&sel!==null&&g.board[sel]){
@@ -570,36 +719,168 @@ function getAllCaps(b,c){const r=[];for(let i=0;i<64;i++){const p=b[i];if(p&&p.c
 function getPCaps(b,pos,p){if(!p)return[];const r=[],row=pos>>3,col=pos&7;if(p.king){for(const[dr,dc]of[[-1,-1],[-1,1],[1,-1],[1,1]]){let rr=row+dr,cc=col+dc;while(rr>=0&&rr<8&&cc>=0&&cc<8){const mid=rr*8+cc;if(b[mid]&&b[mid].color!==p.color){let r2=rr+dr,c2=cc+dc;while(r2>=0&&r2<8&&c2>=0&&c2<8){const land=r2*8+c2;if(!b[land])r.push([pos,land,mid]);else break;r2+=dr;c2+=dc;}break;}else if(b[mid])break;rr+=dr;cc+=dc;}}}else{for(const[dr,dc]of[[-1,-1],[-1,1],[1,-1],[1,1]]){const mr=row+dr,mc=col+dc,tr=row+2*dr,tc=col+2*dc;if(mr>=0&&mr<8&&mc>=0&&mc<8&&tr>=0&&tr<8&&tc>=0&&tc<8){const mid=mr*8+mc,land=tr*8+tc;if(b[mid]&&b[mid].color!==p.color&&!b[land])r.push([pos,land,mid]);}}}return r;}
 function getMvs(b,pos,p){if(!p)return[];const r=[],row=pos>>3,col=pos&7;if(p.king){for(const[dr,dc]of[[-1,-1],[-1,1],[1,-1],[1,1]]){let rr=row+dr,cc=col+dc;while(rr>=0&&rr<8&&cc>=0&&cc<8){if(!b[rr*8+cc])r.push(rr*8+cc);else break;rr+=dr;cc+=dc;}}}else{const dirs=p.color==="red"?[[-1,-1],[-1,1]]:[[1,-1],[1,1]];for(const[dr,dc]of dirs){const nr=row+dr,nc=col+dc;if(nr>=0&&nr<8&&nc>=0&&nc<8&&!b[nr*8+nc])r.push(nr*8+nc);}}return r;}
 
-// ── DICE ──
+// ── КОСТИ ──
 function renderDice(){
   const g=currentGame,myid=String(tgUser.id),p1id=String(g.player1.id);
   const isP1=myid===p1id,gr=g.guesser_role,imG=(isP1&&gr==="p1")||(!isP1&&gr==="p2"),imT=!imG;
-  document.getElementById("dice-s1").textContent=g.scores.p1;document.getElementById("dice-s2").textContent=g.scores.p2;
-  document.getElementById("dice-n1").textContent=g.player1.name;document.getElementById("dice-n2").textContent=g.player2?.name||"?";
+  document.getElementById("dice-s1").textContent=g.scores.p1;
+  document.getElementById("dice-s2").textContent=g.scores.p2;
+  document.getElementById("dice-n1").textContent=g.player1.name;
+  document.getElementById("dice-n2").textContent=g.player2?.name||"?";
   document.getElementById("dice-phase-title").textContent=`Раунд ${g.round} из 2`;
   const DA=document.getElementById("dice-guess-area"),DT=document.getElementById("dice-throw-area"),DW=document.getElementById("dice-wait-area");
-  if(g.status==="finished"){DA.classList.add("hidden");DT.classList.add("hidden");DW.classList.remove("hidden");document.getElementById("dice-wait-msg").textContent="Игра завершена!";document.getElementById("game-status").textContent="";return;}
-  const FACES=["","⚀","⚁","⚂","⚃","⚄","⚅"];
+
+  if(g.status==="finished"){
+    DA.classList.add("hidden");DT.classList.add("hidden");DW.classList.remove("hidden");
+    document.getElementById("dice-wait-msg").textContent="Игра завершена!";
+    document.getElementById("dice-secret-box").classList.add("hidden");
+    document.getElementById("game-status").textContent="";
+    return;
+  }
+
   if(g.phase==="guessing"){
     document.getElementById("game-status").textContent=imG?"Загадай число (2-12)":"Соперник загадывает...";
     if(imG){DA.classList.remove("hidden");DT.classList.add("hidden");DW.classList.add("hidden");renderDiceNums();}
-    else{DA.classList.add("hidden");DT.classList.add("hidden");DW.classList.remove("hidden");document.getElementById("dice-wait-msg").textContent="⏳ Соперник загадывает...";}
-  }else if(g.phase==="throwing"){
-    document.getElementById("game-status").textContent=imT?`Бросай! Попыток: ${g.attempts_left}`:`Соперник бросает... Попыток: ${g.attempts_left}`;
-    if(imT){DA.classList.add("hidden");DT.classList.remove("hidden");DW.classList.add("hidden");const btn=document.getElementById("dice-throw-btn");btn.disabled=false;btn.style.opacity="1";document.getElementById("dice-log").innerHTML=g.round_log.map(e=>`<div class="dice-log-row">${FACES[e.d1]}${FACES[e.d2]} = <b>${e.total}</b> ${e.total===g.secret?"✅":"❌"}</div>`).join("");}
-    else{DA.classList.add("hidden");DT.classList.add("hidden");DW.classList.remove("hidden");document.getElementById("dice-wait-msg").innerHTML=imG&&g.secret?`🤫 Ты загадал <b style="color:#e0e0ff;font-size:22px">${g.secret}</b><br><br>Соперник бросает...`:"⏳ Соперник бросает...";}
+    else{DA.classList.add("hidden");DT.classList.add("hidden");DW.classList.remove("hidden");
+      document.getElementById("dice-wait-msg").textContent="⏳ Соперник загадывает число...";
+      document.getElementById("dice-secret-box").classList.add("hidden");}
+  }
+  else if(g.phase==="throwing"){
+    const att=g.attempts_left;
+    document.getElementById("game-status").textContent=imT?`🎲 Бросай! Попыток: ${att}`:`👀 Соперник бросает... Попыток: ${att}`;
+    if(imT){
+      DA.classList.add("hidden");DT.classList.remove("hidden");DW.classList.add("hidden");
+      if(!diceAnimating){
+        const btn=document.getElementById("dice-throw-btn");btn.disabled=false;btn.style.opacity="1";
+      }
+      renderDiceLog(g.round_log,g.secret,true);
+    } else {
+      DA.classList.add("hidden");DT.classList.add("hidden");DW.classList.remove("hidden");
+      if(imG&&g.secret){
+        document.getElementById("dice-wait-msg").textContent="";
+        document.getElementById("dice-secret-box").classList.remove("hidden");
+        document.getElementById("dice-secret-show").textContent=g.secret;
+        renderDiceLogWatch(g.round_log,g.secret);
+      } else {
+        document.getElementById("dice-wait-msg").textContent="⏳ Соперник бросает кости...";
+        document.getElementById("dice-secret-box").classList.add("hidden");
+      }
+    }
   }
 }
-function renderDiceNums(){const c=document.getElementById("dice-numbers");c.innerHTML="";for(let n=2;n<=12;n++){const b=document.createElement("button");b.className="dice-num-btn"+(diceGuess===n?" selected":"");b.textContent=n;b.onclick=()=>{diceGuess=n;renderDiceNums();};c.appendChild(b);}}
+
+function renderDiceNums(){
+  const c=document.getElementById("dice-numbers");c.innerHTML="";
+  for(let n=2;n<=12;n++){
+    const b=document.createElement("button");b.className="dice-num-btn"+(diceGuess===n?" selected":"");
+    b.textContent=n;b.onclick=()=>{diceGuess=n;renderDiceNums();};c.appendChild(b);
+  }
+}
+
+function renderDiceLog(log,secret,showFaces){
+  const box=document.getElementById("dice-log");
+  if(!log.length){box.style.display="none";return;}
+  box.style.display="block";
+  box.innerHTML=log.map(e=>`<div class="dice-log-row">
+    <span class="dice-log-faces">${DICE_FACES[e.d1]}${DICE_FACES[e.d2]}</span>
+    <span>= <b>${e.total}</b></span>
+    <span>${e.total===secret?"✅":"❌"}</span>
+  </div>`).join("");
+}
+
+function renderDiceLogWatch(log,secret){
+  const box=document.getElementById("dice-log-watch");
+  if(!log.length){box.style.display="none";return;}
+  box.style.display="block";
+  box.innerHTML=log.map(e=>`<div class="dice-log-row">
+    <span class="dice-log-faces">${DICE_FACES[e.d1]}${DICE_FACES[e.d2]}</span>
+    <span>= <b>${e.total}</b></span>
+    <span>${e.total===secret?"✅":"❌"}</span>
+  </div>`).join("");
+}
+
+// ── АНИМАЦИЯ БРОСКА КОСТЕЙ ──
+function animateDiceRoll(d1,d2,total){
+  diceAnimating=true;
+  const die1=document.getElementById("die1");
+  const die2=document.getElementById("die2");
+  const btn=document.getElementById("dice-throw-btn");
+  if(btn) {btn.disabled=true;btn.style.opacity=".4";}
+
+  // Случайные грани во время анимации
+  const allFaces=["⚀","⚁","⚂","⚃","⚄","⚅"];
+  let count=0;
+  const interval=setInterval(()=>{
+    if(die1) die1.textContent=allFaces[Math.floor(Math.random()*6)];
+    if(die2) die2.textContent=allFaces[Math.floor(Math.random()*6)];
+    count++;
+    if(count>=12) clearInterval(interval);
+  },80);
+
+  // Добавляем класс анимации
+  if(die1){die1.classList.add("rolling");setTimeout(()=>die1.classList.remove("rolling"),900);}
+  if(die2){die2.classList.add("rolling");setTimeout(()=>die2.classList.remove("rolling"),900);}
+
+  // Показываем финальный результат
+  setTimeout(()=>{
+    clearInterval(interval);
+    if(die1) die1.textContent=DICE_FACES[d1];
+    if(die2) die2.textContent=DICE_FACES[d2];
+    // Bounce анимация
+    if(die1){die1.classList.add("bounce");setTimeout(()=>die1.classList.remove("bounce"),400);}
+    if(die2){die2.classList.add("bounce");setTimeout(()=>die2.classList.remove("bounce"),400);}
+
+    // Показываем итог
+    const secret=currentGame?.secret;
+    const hit=secret&&total===secret;
+    const resDiv=document.getElementById("dice-last-result");
+    if(resDiv) resDiv.innerHTML=`<div class="dice-result-row"><span class="dice-result-total">${total}</span><span class="${hit?"dice-result-hit":"dice-result-miss"}">${hit?"🎯 Попал!":"❌"}</span></div>`;
+
+    diceAnimating=false;
+
+    // Обновляем лог и кнопку
+    if(currentGame){
+      renderDiceLog(currentGame.round_log,currentGame.secret,true);
+      if(currentGame.status==="finished") showResult();
+      else{
+        const b=document.getElementById("dice-throw-btn");
+        if(b&&currentGame.phase==="throwing"){b.disabled=false;b.style.opacity="1";}
+        if(currentGame.phase==="guessing"||currentGame.status==="finished") renderGame();
+      }
+    }
+  },950);
+
+  // Анимируем кубики наблюдателя тоже
+  const dw1=document.getElementById("die1-watch"),dw2=document.getElementById("die2-watch");
+  if(dw1&&dw2){
+    dw1.classList.add("rolling");dw2.classList.add("rolling");
+    let c2=0;
+    const iv2=setInterval(()=>{
+      dw1.textContent=allFaces[Math.floor(Math.random()*6)];
+      dw2.textContent=allFaces[Math.floor(Math.random()*6)];
+      c2++;if(c2>=12)clearInterval(iv2);
+    },80);
+    setTimeout(()=>{
+      clearInterval(iv2);
+      dw1.textContent=DICE_FACES[d1];dw2.textContent=DICE_FACES[d2];
+      dw1.classList.remove("rolling");dw2.classList.remove("rolling");
+      if(currentGame) renderDiceLogWatch(currentGame.round_log,currentGame.secret);
+    },950);
+  }
+}
+
 function diceConfirmGuess(){if(!diceGuess){toast("Выбери число!");return;}sendWS({type:"dice_guess",number:diceGuess});diceGuess=null;}
-function diceThrow(){const b=document.getElementById("dice-throw-btn");b.disabled=true;b.style.opacity=".5";sendWS({type:"dice_throw"});}
+function diceThrow(){
+  if(diceAnimating) return;
+  const b=document.getElementById("dice-throw-btn");b.disabled=true;b.style.opacity=".4";
+  sendWS({type:"dice_throw"});
+}
 
 // ══ ЧАТ ══
 function sendChat(){const inp=document.getElementById("chat-input"),text=inp.value.trim();if(!text)return;addChatMsg(tgUser.first_name,text,true);sendWS({type:"chat",text,user_id:String(tgUser.id)});inp.value="";}
 function addChatMsg(from,text,isMe=false){const c=document.getElementById("chat-messages");const d=document.createElement("div");d.className="chat-msg";d.innerHTML=`<span class="chat-from ${isMe?"me":""}">${from}:</span> ${text}`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
 document.getElementById("chat-input").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
 
-// ══ ТОСТ ══
 let toastT=null;
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");if(toastT)clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove("show"),2500);}
 </script>
