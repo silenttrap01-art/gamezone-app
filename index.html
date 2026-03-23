@@ -8,296 +8,337 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; min-height:100vh; user-select:none; }
-
-/* ── УТИЛИТЫ ── */
 .hidden { display:none !important; }
 .screen { display:none; flex-direction:column; min-height:100vh; }
 .screen.active { display:flex; }
 
-/* ── ХЕДЕР ── */
-.header { background:#1a1a2e; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #2a2a4a; flex-shrink:0; }
+/* HEADER */
+.header { background:#1a1a2e; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #2a2a4a; flex-shrink:0; }
 .header h1 { font-size:18px; font-weight:600; }
-.stars-badge { background:#2a2a4a; border-radius:20px; padding:5px 12px; font-size:13px; color:#ffd700; }
-.back-btn { background:#1a1a2e; border:1px solid #2a2a4a; color:#e0e0ff; padding:7px 14px; border-radius:10px; cursor:pointer; font-size:13px; }
+.stars-badge { background:#2a2a4a; border-radius:20px; padding:6px 14px; font-size:13px; color:#ffd700; }
+.back-btn { background:#1a1a2e; border:1px solid #3a3a5a; color:#e0e0ff; padding:10px 18px; border-radius:12px; cursor:pointer; font-size:14px; min-width:80px; }
 
-/* ── ГЛАВНАЯ ── */
-.home-body { padding:14px; flex:1; overflow-y:auto; padding-bottom:80px; }
+/* HOME */
+.home-body { padding:14px; flex:1; overflow-y:auto; padding-bottom:90px; }
 .section-title { font-size:11px; color:#6666aa; text-transform:uppercase; letter-spacing:.5px; margin:16px 0 10px; }
-.games-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.game-card { background:#1a1a2e; border-radius:16px; padding:16px; border:1px solid #2a2a4a; cursor:pointer; transition:border-color .2s; }
-.game-card:active { border-color:#5b5ef4; }
-.game-icon { font-size:26px; margin-bottom:8px; }
-.game-name { font-size:13px; font-weight:500; }
-.game-desc { font-size:11px; color:#6666aa; margin-top:3px; }
+.games-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.game-card { background:#1a1a2e; border-radius:18px; padding:20px 16px; border:1px solid #2a2a4a; cursor:pointer; transition:all .2s; active-color:#5b5ef4; }
+.game-card:active { border-color:#5b5ef4; background:#1e1e3a; transform:scale(0.97); }
+.game-icon { font-size:28px; margin-bottom:10px; }
+.game-name { font-size:14px; font-weight:600; }
+.game-desc { font-size:12px; color:#6666aa; margin-top:4px; }
 
-/* ── ЛИДЕРБОРД ── */
-.lb-card { background:#1a1a2e; border-radius:14px; padding:12px; }
-.lb-row { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid #2a2a3a; }
+/* TABS */
+.tab-bar { display:flex; background:#1a1a2e; border-radius:12px; padding:4px; margin-bottom:14px; }
+.tab-btn { flex:1; padding:10px; text-align:center; font-size:13px; color:#6666aa; border-radius:10px; cursor:pointer; transition:all .2s; }
+.tab-btn.active { background:#2a2a4a; color:#e0e0ff; font-weight:600; }
+
+/* LEADERBOARD */
+.lb-card { background:#1a1a2e; border-radius:14px; overflow:hidden; }
+.lb-row { display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom:1px solid #1e1e3a; }
 .lb-row:last-child { border-bottom:none; }
-.lb-rank { font-size:13px; font-weight:600; width:20px; }
-.lb-rank.g { color:#ffd700; }
-.lb-rank.s { color:#aaaacc; }
-.lb-rank.b { color:#cd7f32; }
-.lb-name { flex:1; font-size:13px; }
-.lb-score { font-size:12px; color:#ffd700; }
+.lb-rank { font-size:14px; font-weight:700; width:24px; text-align:center; }
+.lb-rank.g { color:#ffd700; } .lb-rank.s { color:#aaaacc; } .lb-rank.b { color:#cd7f32; }
+.lb-name { flex:1; font-size:14px; }
+.lb-score { font-size:13px; color:#ffd700; font-weight:600; }
 
-/* ── ЛОББИ ── */
-.lobby-body { padding:16px; flex:1; display:flex; flex-direction:column; gap:12px; }
-.lobby-card { background:#1a1a2e; border-radius:14px; padding:16px; }
-.lobby-title { font-size:16px; font-weight:600; margin-bottom:8px; }
-.lobby-desc { font-size:13px; color:#9999cc; margin-bottom:14px; line-height:1.5; }
-.btn-primary { width:100%; background:#5b5ef4; border:none; border-radius:12px; padding:14px; color:#fff; font-size:15px; font-weight:600; cursor:pointer; }
-.btn-primary:active { opacity:.85; }
-.btn-danger { width:100%; background:#c0392b; border:none; border-radius:12px; padding:12px; color:#fff; font-size:14px; font-weight:500; cursor:pointer; margin-top:8px; }
-.game-id-display { background:#0f0f1a; border-radius:10px; padding:10px 14px; font-size:12px; color:#5b5ef4; word-break:break-all; margin:8px 0; }
-.input-field { width:100%; background:#0f0f1a; border:1px solid #2a2a4a; border-radius:10px; padding:12px; color:#e0e0ff; font-size:15px; outline:none; }
+/* LOBBY */
+.lobby-body { padding:16px; flex:1; display:flex; flex-direction:column; gap:14px; }
+.lobby-card { background:#1a1a2e; border-radius:16px; padding:18px; }
+.lobby-title { font-size:16px; font-weight:600; margin-bottom:6px; }
+.lobby-desc { font-size:13px; color:#9999cc; margin-bottom:16px; line-height:1.5; }
 
-/* ── ИГРОВОЙ ЭКРАН ── */
+/* BUTTONS */
+.btn { width:100%; border:none; border-radius:14px; padding:16px; font-size:15px; font-weight:600; cursor:pointer; transition:all .15s; display:block; text-align:center; }
+.btn:active { transform:scale(0.97); opacity:.9; }
+.btn-primary { background:#5b5ef4; color:#fff; }
+.btn-success { background:#27ae60; color:#fff; }
+.btn-warning { background:#e67e22; color:#fff; }
+.btn-danger { background:#c0392b; color:#fff; }
+.btn-secondary { background:#2a2a4a; color:#e0e0ff; }
+.btn + .btn { margin-top:10px; }
+
+.input-field { width:100%; background:#0f0f1a; border:1px solid #3a3a5a; border-radius:12px; padding:14px 16px; color:#e0e0ff; font-size:15px; outline:none; }
+.input-field:focus { border-color:#5b5ef4; }
+
+/* FRIENDS LIST */
+.friends-list { margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+.friend-row { background:#0f0f1a; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer; border:1px solid #2a2a4a; transition:all .15s; }
+.friend-row:active { border-color:#5b5ef4; background:#1a1a3a; }
+.friend-avatar { width:38px; height:38px; border-radius:50%; background:#2a2a5a; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; color:#9999cc; flex-shrink:0; }
+.friend-name { flex:1; font-size:14px; font-weight:500; }
+.friend-arrow { color:#5b5ef4; font-size:18px; }
+
+/* WAITING */
+.connect-screen { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; gap:16px; text-align:center; }
+.connect-spinner { width:48px; height:48px; border:3px solid #2a2a4a; border-top-color:#5b5ef4; border-radius:50%; animation:spin 1s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.game-code-box { background:#1a1a2e; border:2px dashed #3a3a6a; border-radius:14px; padding:16px 24px; font-size:22px; font-weight:700; color:#5b5ef4; letter-spacing:2px; cursor:pointer; width:100%; text-align:center; }
+
+/* GAME SCREEN */
 .game-header { background:#1a1a2e; padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #2a2a4a; flex-shrink:0; }
-.game-title { font-size:16px; font-weight:600; flex:1; }
-.surrender-btn { background:none; border:1px solid #c0392b; color:#c0392b; padding:5px 10px; border-radius:8px; font-size:12px; cursor:pointer; }
-.game-body { flex:1; overflow-y:auto; padding:14px; padding-bottom:80px; }
-.status-bar { background:#1a1a2e; border-radius:12px; padding:10px 14px; font-size:13px; color:#9999cc; margin-bottom:12px; text-align:center; }
+.game-title-text { font-size:15px; font-weight:600; flex:1; }
+.surrender-btn { background:none; border:1px solid #c0392b; color:#c0392b; padding:8px 12px; border-radius:10px; font-size:13px; cursor:pointer; white-space:nowrap; }
+.game-body { flex:1; overflow-y:auto; padding:14px; padding-bottom:20px; }
+.status-bar { background:#1a1a2e; border-radius:12px; padding:12px 16px; font-size:14px; color:#9999cc; margin-bottom:14px; text-align:center; line-height:1.4; }
 .status-bar b { color:#e0e0ff; }
 
-/* ── ЧАТ ── */
-.chat-section { background:#1a1a2e; border-radius:14px; padding:12px; margin-top:12px; }
-.chat-title { font-size:12px; color:#6666aa; margin-bottom:8px; }
-.chat-messages { max-height:120px; overflow-y:auto; margin-bottom:8px; }
-.chat-msg { font-size:12px; padding:3px 0; border-bottom:1px solid #2a2a3a; }
-.chat-msg:last-child { border-bottom:none; }
-.chat-msg .chat-from { color:#5b5ef4; font-weight:500; }
-.chat-row { display:flex; gap:8px; }
-.chat-input { flex:1; background:#0f0f1a; border:1px solid #2a2a4a; border-radius:8px; padding:8px 10px; color:#e0e0ff; font-size:13px; outline:none; }
-.chat-send { background:#5b5ef4; border:none; border-radius:8px; padding:8px 12px; color:#fff; font-size:13px; cursor:pointer; }
+/* RESULT */
+.result-box { background:#1a1a2e; border-radius:16px; padding:20px; text-align:center; margin-bottom:14px; }
+.result-icon { font-size:52px; margin-bottom:10px; }
+.result-text { font-size:20px; font-weight:700; margin-bottom:6px; }
+.result-sub { font-size:13px; color:#9999cc; }
 
-/* ── КРЕСТИКИ-НОЛИКИ ── */
-.ttt-board { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:12px; }
-.ttt-cell { background:#1a1a2e; border-radius:12px; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:36px; cursor:pointer; border:1px solid #2a2a4a; transition:background .15s; }
-.ttt-cell:active { background:#2a2a4a; }
+/* TTT */
+.ttt-board { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.ttt-cell { background:#1a1a2e; border-radius:14px; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:40px; cursor:pointer; border:1px solid #2a2a4a; transition:all .15s; }
+.ttt-cell:active { background:#2a2a4a; transform:scale(0.95); }
+.ttt-cell.clickable:hover { border-color:#5b5ef4; }
 
-/* ── КНБ ── */
-.rps-choices { display:flex; justify-content:space-around; margin:16px 0; }
-.rps-btn { background:#1a1a2e; border:2px solid #2a2a4a; border-radius:16px; padding:18px; font-size:38px; cursor:pointer; transition:all .2s; }
-.rps-btn.selected { border-color:#5b5ef4; background:#2a2a5a; }
-.rps-ready-btn { width:100%; background:#27ae60; border:none; border-radius:12px; padding:13px; color:#fff; font-size:15px; font-weight:600; cursor:pointer; margin-top:8px; }
-.rps-result-box { background:#1a1a2e; border-radius:14px; padding:16px; text-align:center; margin-top:12px; }
-.rps-vs { display:flex; justify-content:space-around; align-items:center; font-size:42px; margin-bottom:10px; }
-.rps-outcome { font-size:18px; font-weight:600; }
-.win { color:#4ade80; } .lose { color:#f45b5b; } .draw-c { color:#ffd700; }
+/* RPS */
+.rps-choices { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0; }
+.rps-btn { background:#1a1a2e; border:2px solid #2a2a4a; border-radius:18px; padding:20px 10px; font-size:42px; cursor:pointer; transition:all .2s; text-align:center; }
+.rps-btn:active { transform:scale(0.93); }
+.rps-btn.selected { border-color:#5b5ef4; background:#1e1e3a; }
+.rps-label { font-size:11px; color:#6666aa; margin-top:4px; }
 
-/* ── ШАШКИ ── */
-.checkers-board { display:grid; grid-template-columns:repeat(8,1fr); gap:1px; background:#2a2a4a; border-radius:10px; overflow:hidden; margin-bottom:12px; }
-.ch-cell { aspect-ratio:1; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; }
+/* CHECKERS */
+.checkers-wrap { border-radius:12px; overflow:hidden; margin-bottom:14px; border:2px solid #2a2a4a; }
+.checkers-board { display:grid; grid-template-columns:repeat(8,1fr); }
+.ch-cell { aspect-ratio:1; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:clamp(14px,3.5vw,22px); transition:background .1s; }
 .ch-light { background:#2a2a5a; }
 .ch-dark { background:#1a1a2e; }
-.ch-cell.sel { background:#3a5a3a; }
-.ch-cell.target { background:#2a4a2a; }
-.ch-cell.capture { background:#4a2a2a; }
-.checkers-legend { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:10px; font-size:11px; color:#6666aa; }
+.ch-cell.sel { background:#3a5a2a !important; }
+.ch-cell.target { background:#2a4a1a !important; }
+.ch-cell.capture { background:#5a2a1a !important; }
 
-/* ── КОСТИ ── */
-.dice-phase { background:#1a1a2e; border-radius:14px; padding:16px; margin-bottom:12px; }
-.dice-phase-title { font-size:14px; font-weight:600; margin-bottom:8px; }
-.dice-numbers { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-bottom:12px; }
-.dice-num-btn { background:#0f0f1a; border:1px solid #2a2a4a; border-radius:8px; padding:10px; font-size:15px; font-weight:600; cursor:pointer; text-align:center; color:#e0e0ff; }
-.dice-num-btn.selected { background:#2a2a5a; border-color:#5b5ef4; color:#5b5ef4; }
-.dice-throw-btn { width:100%; background:#e67e22; border:none; border-radius:12px; padding:14px; color:#fff; font-size:16px; font-weight:600; cursor:pointer; }
-.dice-display { display:flex; justify-content:center; gap:16px; margin:16px 0; font-size:52px; }
-.dice-log { background:#0f0f1a; border-radius:10px; padding:10px; margin-top:10px; }
-.dice-log-row { font-size:12px; padding:3px 0; color:#9999cc; }
-.dice-score { display:flex; justify-content:space-around; background:#1a1a2e; border-radius:12px; padding:12px; margin-bottom:12px; }
-.dice-score-item { text-align:center; }
-.dice-score-val { font-size:24px; font-weight:600; color:#5b5ef4; }
-.dice-score-name { font-size:11px; color:#6666aa; }
+/* DICE */
+.dice-score-bar { display:flex; background:#1a1a2e; border-radius:14px; padding:14px; margin-bottom:14px; }
+.dice-score-item { flex:1; text-align:center; }
+.dice-score-val { font-size:28px; font-weight:700; color:#5b5ef4; }
+.dice-score-name { font-size:12px; color:#6666aa; margin-top:2px; }
+.dice-score-divider { width:1px; background:#2a2a4a; margin:0 10px; }
+.dice-numbers { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px; }
+.dice-num-btn { background:#1a1a2e; border:2px solid #2a2a4a; border-radius:12px; padding:14px 8px; font-size:16px; font-weight:700; cursor:pointer; text-align:center; color:#e0e0ff; transition:all .15s; }
+.dice-num-btn:active { transform:scale(0.93); }
+.dice-num-btn.selected { background:#1e1e3a; border-color:#5b5ef4; color:#5b5ef4; }
+.dice-display { display:flex; justify-content:center; gap:20px; margin:20px 0; font-size:56px; }
+.dice-log-row { font-size:13px; padding:6px 0; border-bottom:1px solid #1e1e3a; color:#9999cc; }
+.dice-log-row:last-child { border-bottom:none; }
 
-/* ── КОННЕКТ ── */
-.connect-screen { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; gap:16px; text-align:center; }
-.connect-spinner { width:40px; height:40px; border:3px solid #2a2a4a; border-top-color:#5b5ef4; border-radius:50%; animation:spin 1s linear infinite; }
-@keyframes spin { to { transform:rotate(360deg); } }
-.connect-msg { font-size:14px; color:#9999cc; }
+/* CHAT */
+.chat-wrap { background:#1a1a2e; border-radius:14px; padding:14px; margin-top:14px; }
+.chat-title { font-size:12px; color:#6666aa; margin-bottom:10px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+.chat-messages { max-height:130px; overflow-y:auto; margin-bottom:10px; }
+.chat-msg { font-size:13px; padding:4px 0; border-bottom:1px solid #1e1e3a; line-height:1.4; }
+.chat-msg:last-child { border-bottom:none; }
+.chat-from { color:#5b5ef4; font-weight:600; }
+.chat-from.me { color:#27ae60; }
+.chat-row { display:flex; gap:8px; }
+.chat-input { flex:1; background:#0f0f1a; border:1px solid #2a2a4a; border-radius:10px; padding:10px 14px; color:#e0e0ff; font-size:14px; outline:none; }
+.chat-input:focus { border-color:#5b5ef4; }
+.chat-send { background:#5b5ef4; border:none; border-radius:10px; padding:10px 16px; color:#fff; font-size:15px; cursor:pointer; font-weight:600; }
 
-/* ── НАВБАР ── */
-.navbar { position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; border-top:1px solid #2a2a4a; display:flex; padding:8px 0 20px; z-index:100; }
-.nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; padding:6px; }
-.nav-icon { font-size:20px; }
+/* NAVBAR */
+.navbar { position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; border-top:1px solid #2a2a4a; display:flex; padding:10px 0 22px; z-index:100; }
+.nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; padding:6px; }
+.nav-icon { font-size:22px; }
 .nav-label { font-size:10px; color:#6666aa; }
 .nav-item.active .nav-label { color:#5b5ef4; }
+.nav-item.active .nav-icon { transform:scale(1.1); }
 
-/* ── ТОСТ ── */
-.toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%); background:#333355; color:#e0e0ff; padding:10px 20px; border-radius:20px; font-size:13px; z-index:200; opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; }
+/* TOAST */
+.toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:#333355ee; color:#e0e0ff; padding:12px 24px; border-radius:24px; font-size:14px; z-index:300; opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; max-width:80vw; text-align:center; }
 .toast.show { opacity:1; }
 </style>
 </head>
 <body>
 
-<!-- ТОСТ -->
 <div class="toast" id="toast"></div>
 
-<!-- ══════════════════ ГЛАВНАЯ ══════════════════ -->
+<!-- ══ ГЛАВНАЯ ══ -->
 <div class="screen active" id="screen-home">
   <div class="header">
     <h1>🎮 GameZone</h1>
     <div class="stars-badge">★ <span id="balance">0</span></div>
   </div>
   <div class="home-body">
-    <div class="section-title">Выбери игру</div>
-    <div class="games-grid">
-      <div class="game-card" onclick="openLobby('ttt')">
-        <div class="game-icon">✕○</div>
-        <div class="game-name">Крестики-нолики</div>
-        <div class="game-desc">2 игрока</div>
-      </div>
-      <div class="game-card" onclick="openLobby('rps')">
-        <div class="game-icon">✊</div>
-        <div class="game-name">Камень-ножницы</div>
-        <div class="game-desc">2 игрока</div>
-      </div>
-      <div class="game-card" onclick="openLobby('checkers')">
-        <div class="game-icon">⬛</div>
-        <div class="game-name">Шашки</div>
-        <div class="game-desc">2 игрока</div>
-      </div>
-      <div class="game-card" onclick="openLobby('dice')">
-        <div class="game-icon">🎲</div>
-        <div class="game-name">Кости</div>
-        <div class="game-desc">2 игрока</div>
+    <div class="tab-bar">
+      <div class="tab-btn active" id="tab-games" onclick="switchHomeTab('games')">🎮 Игры</div>
+      <div class="tab-btn" id="tab-rating" onclick="switchHomeTab('rating')">🏆 Рейтинг</div>
+    </div>
+
+    <div id="home-games">
+      <div class="games-grid">
+        <div class="game-card" onclick="openLobby('ttt')">
+          <div class="game-icon">✕○</div>
+          <div class="game-name">Крестики-нолики</div>
+          <div class="game-desc">2 игрока</div>
+        </div>
+        <div class="game-card" onclick="openLobby('rps')">
+          <div class="game-icon">✊</div>
+          <div class="game-name">Камень-ножницы</div>
+          <div class="game-desc">2 игрока</div>
+        </div>
+        <div class="game-card" onclick="openLobby('checkers')">
+          <div class="game-icon">⬛</div>
+          <div class="game-name">Шашки</div>
+          <div class="game-desc">2 игрока</div>
+        </div>
+        <div class="game-card" onclick="openLobby('dice')">
+          <div class="game-icon">🎲</div>
+          <div class="game-name">Кости</div>
+          <div class="game-desc">2 игрока</div>
+        </div>
       </div>
     </div>
-    <div class="section-title">Таблица лидеров</div>
-    <div class="lb-card" id="leaderboard">
-      <div class="lb-row"><div class="lb-rank g">1</div><div class="lb-name">Alexandr</div><div class="lb-score">★ 0</div></div>
-    </div>
-  </div>
-  <div class="navbar">
-    <div class="nav-item active" onclick="showTab('home')" id="nav-home">
-      <div class="nav-icon">🎮</div><div class="nav-label">Игры</div>
-    </div>
-    <div class="nav-item" onclick="showTab('leaders')" id="nav-leaders">
-      <div class="nav-icon">🏆</div><div class="nav-label">Лидеры</div>
+
+    <div id="home-rating" class="hidden">
+      <div class="tab-bar" style="margin-bottom:12px">
+        <div class="tab-btn active" id="rtab-all" onclick="switchRatingTab('all')">Общий</div>
+        <div class="tab-btn" id="rtab-ttt" onclick="switchRatingTab('ttt')">✕○</div>
+        <div class="tab-btn" id="rtab-rps" onclick="switchRatingTab('rps')">✊</div>
+        <div class="tab-btn" id="rtab-checkers" onclick="switchRatingTab('checkers')">⬛</div>
+        <div class="tab-btn" id="rtab-dice" onclick="switchRatingTab('dice')">🎲</div>
+      </div>
+      <div class="lb-card" id="rating-list">
+        <div class="lb-row"><div class="lb-rank g">1</div><div class="lb-name">—</div><div class="lb-score">★ 0</div></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════ ЛОББИ ══════════════════ -->
+<!-- ══ ЛОББИ ══ -->
 <div class="screen" id="screen-lobby">
   <div class="header">
     <button class="back-btn" onclick="goHome()">← Назад</button>
-    <div class="game-title" id="lobby-title"></div>
-    <div style="width:60px"></div>
+    <div id="lobby-title" style="font-size:16px;font-weight:600;flex:1;text-align:center"></div>
+    <div style="width:80px"></div>
   </div>
   <div class="lobby-body">
     <div class="lobby-card">
       <div class="lobby-title">🆕 Создать игру</div>
-      <div class="lobby-desc">Создай игру и поделись кодом с другом</div>
-      <button class="btn-primary" onclick="createGame()">Создать игру</button>
+      <div class="lobby-desc">Создай игру и поделись кодом с другом. Можешь также вызвать друга прямо из Telegram.</div>
+      <button class="btn btn-primary" onclick="createGame()">Создать игру</button>
     </div>
     <div class="lobby-card">
       <div class="lobby-title">🔗 Присоединиться</div>
-      <div class="lobby-desc">Введи код игры от друга</div>
-      <input class="input-field" id="join-code" placeholder="Введи код игры..." maxlength="20" style="margin-bottom:10px">
-      <button class="btn-primary" onclick="joinGame()">Присоединиться</button>
+      <div class="lobby-desc">Введи код игры который прислал тебе друг</div>
+      <input class="input-field" id="join-code" placeholder="Введи код игры..." style="margin-bottom:12px">
+      <button class="btn btn-primary" onclick="joinGame()">Присоединиться</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════ ОЖИДАНИЕ ══════════════════ -->
+<!-- ══ ОЖИДАНИЕ ══ -->
 <div class="screen" id="screen-waiting">
   <div class="header">
     <button class="back-btn" onclick="leaveGame()">← Выйти</button>
-    <div class="game-title">Ожидание</div>
-    <div style="width:60px"></div>
+    <div style="font-size:16px;font-weight:600;flex:1;text-align:center">Ожидание</div>
+    <div style="width:80px"></div>
   </div>
   <div class="connect-screen">
     <div class="connect-spinner"></div>
-    <div style="font-size:16px; font-weight:600;">Ждём соперника...</div>
-    <div class="connect-msg">Поделись кодом с другом:</div>
-    <div class="game-id-display" id="waiting-code" onclick="copyCode()">—</div>
-    <button class="btn-primary" onclick="copyCode()" style="max-width:200px">📋 Скопировать код</button>
+    <div style="font-size:17px;font-weight:600;">Ждём соперника...</div>
+    <div style="font-size:13px;color:#9999cc;">Поделись кодом с другом:</div>
+    <div class="game-code-box" id="waiting-code" onclick="copyCode()">—</div>
+    <button class="btn btn-primary" onclick="copyCode()" style="max-width:240px">📋 Скопировать код</button>
+    <button class="btn btn-secondary" onclick="shareInvite()" style="max-width:240px">📤 Отправить в Telegram</button>
   </div>
 </div>
 
-<!-- ══════════════════ ИГРА ══════════════════ -->
+<!-- ══ ИГРА ══ -->
 <div class="screen" id="screen-game">
   <div class="game-header">
     <button class="back-btn" onclick="leaveGame()">← Выйти</button>
-    <div class="game-title" id="active-game-title"></div>
+    <div class="game-title-text" id="active-game-title"></div>
     <button class="surrender-btn" onclick="surrender()">🏳 Сдаться</button>
   </div>
   <div class="game-body">
     <div class="status-bar" id="game-status">Загрузка...</div>
 
-    <!-- КРЕСТИКИ-НОЛИКИ -->
+    <!-- РЕЗУЛЬТАТ -->
+    <div class="result-box hidden" id="result-box">
+      <div class="result-icon" id="result-icon">🏆</div>
+      <div class="result-text" id="result-text"></div>
+      <div class="result-sub" id="result-sub"></div>
+      <button class="btn btn-primary" onclick="rematch()" style="margin-top:16px">🔄 Реванш</button>
+      <button class="btn btn-secondary" onclick="goHome()" style="margin-top:10px">🏠 На главную</button>
+    </div>
+
+    <!-- TTT -->
     <div id="ttt-area" class="hidden">
       <div class="ttt-board" id="ttt-board"></div>
     </div>
 
-    <!-- КНБ -->
+    <!-- RPS -->
     <div id="rps-area" class="hidden">
-      <div style="text-align:center; font-size:13px; color:#9999cc; margin-bottom:6px;">Выбери оружие:</div>
+      <div style="text-align:center;font-size:13px;color:#9999cc;margin-bottom:4px;">Выбери своё оружие:</div>
       <div class="rps-choices">
-        <div class="rps-btn" id="rps-rock" onclick="rpsChoose('rock')">✊</div>
-        <div class="rps-btn" id="rps-scissors" onclick="rpsChoose('scissors')">✌️</div>
-        <div class="rps-btn" id="rps-paper" onclick="rpsChoose('paper')">✋</div>
-      </div>
-      <button class="rps-ready-btn" id="rps-ready-btn" onclick="rpsReady()">✅ Готов!</button>
-      <div class="rps-result-box hidden" id="rps-result">
-        <div class="rps-vs">
-          <span id="rps-p1-emoji">✊</span>
-          <span style="font-size:16px;color:#6666aa">vs</span>
-          <span id="rps-p2-emoji">✊</span>
+        <div onclick="rpsChoose('rock')">
+          <div class="rps-btn" id="rps-rock">✊</div>
+          <div class="rps-label" style="text-align:center">Камень</div>
         </div>
-        <div class="rps-outcome" id="rps-outcome"></div>
+        <div onclick="rpsChoose('scissors')">
+          <div class="rps-btn" id="rps-scissors">✌️</div>
+          <div class="rps-label" style="text-align:center">Ножницы</div>
+        </div>
+        <div onclick="rpsChoose('paper')">
+          <div class="rps-btn" id="rps-paper">✋</div>
+          <div class="rps-label" style="text-align:center">Бумага</div>
+        </div>
       </div>
+      <button class="btn btn-success" id="rps-ready-btn" onclick="rpsReady()">✅ Готов!</button>
     </div>
 
-    <!-- ШАШКИ -->
+    <!-- CHECKERS -->
     <div id="checkers-area" class="hidden">
-      <div class="checkers-legend">
-        <span>🔴 Твои (красные)</span>
-        <span>⚪ Соперник (белые)</span>
-        <span>👑 Дамка красных</span>
-        <span>💎 Дамка белых</span>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:#6666aa;">
+        <span>🔴 Твои</span><span>⚪ Соперник</span><span>👑 Дамка кр.</span><span>💎 Дамка бел.</span>
+        <span>🟢 Ход</span><span>💥 Бить!</span>
       </div>
-      <div class="checkers-board" id="checkers-board"></div>
+      <div class="checkers-wrap">
+        <div class="checkers-board" id="checkers-board"></div>
+      </div>
     </div>
 
-    <!-- КОСТИ -->
+    <!-- DICE -->
     <div id="dice-area" class="hidden">
-      <div class="dice-score">
+      <div class="dice-score-bar">
         <div class="dice-score-item">
           <div class="dice-score-val" id="dice-s1">0</div>
           <div class="dice-score-name" id="dice-n1">Игрок 1</div>
         </div>
-        <div style="font-size:20px;color:#6666aa;align-self:center">:</div>
+        <div class="dice-score-divider"></div>
         <div class="dice-score-item">
           <div class="dice-score-val" id="dice-s2">0</div>
           <div class="dice-score-name" id="dice-n2">Игрок 2</div>
         </div>
       </div>
-      <div class="dice-phase">
-        <div class="dice-phase-title" id="dice-phase-title">Загадай число</div>
+      <div style="background:#1a1a2e;border-radius:14px;padding:16px;margin-bottom:14px;">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px;" id="dice-phase-title">Раунд 1 из 2</div>
         <div id="dice-guess-area">
+          <div style="font-size:13px;color:#9999cc;margin-bottom:10px;">Выбери число которое должен выбросить соперник:</div>
           <div class="dice-numbers" id="dice-numbers"></div>
-          <button class="btn-primary" onclick="diceConfirmGuess()">Загадать!</button>
+          <button class="btn btn-primary" onclick="diceConfirmGuess()">🤫 Загадать!</button>
         </div>
         <div id="dice-throw-area" class="hidden">
           <div class="dice-display" id="dice-display">🎲 🎲</div>
-          <button class="dice-throw-btn" id="dice-throw-btn" onclick="diceThrow()">🎲 Бросить кости!</button>
-          <div class="dice-log" id="dice-log"></div>
+          <button class="btn btn-warning" id="dice-throw-btn" onclick="diceThrow()">🎲 Бросить кости!</button>
+          <div id="dice-log" style="margin-top:12px;"></div>
         </div>
         <div id="dice-wait-area" class="hidden">
-          <div style="text-align:center;padding:20px;color:#9999cc;">⏳ Ждём соперника...</div>
+          <div style="text-align:center;padding:20px;color:#9999cc;font-size:14px;" id="dice-wait-msg">⏳ Ждём...</div>
         </div>
       </div>
     </div>
 
-    <!-- ЧАТ -->
-    <div class="chat-section">
-      <div class="chat-title">💬 Чат</div>
+    <!-- CHAT -->
+    <div class="chat-wrap">
+      <div class="chat-title">💬 Чат с соперником</div>
       <div class="chat-messages" id="chat-messages"></div>
       <div class="chat-row">
-        <input class="chat-input" id="chat-input" placeholder="Написать..." maxlength="100">
+        <input class="chat-input" id="chat-input" placeholder="Написать сопернику..." maxlength="100">
         <button class="chat-send" onclick="sendChat()">→</button>
       </div>
     </div>
@@ -305,45 +346,33 @@ body { font-family:-apple-system,sans-serif; background:#0f0f1a; color:#e0e0ff; 
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-// КОНФИГ
-// ══════════════════════════════════════════════════════
-const SERVER = "wss://gamezone-server-production.up.railway.app";
+// ══════════════════════════════════════════════════
+const SERVER_WS = "wss://gamezone-server-production.up.railway.app";
+const BOT_USERNAME = "besttoy_bot";
+const GAME_NAMES = { ttt:"Крестики-нолики", rps:"Камень-ножницы-бумага", checkers:"Шашки", dice:"Кости" };
+const GAME_ICONS = { ttt:"✕○", rps:"✊", checkers:"⬛", dice:"🎲" };
 
-// ══════════════════════════════════════════════════════
-// СОСТОЯНИЕ
-// ══════════════════════════════════════════════════════
-let tgUser = null;
-let ws = null;
-let currentGame = null;
-let currentGameType = null;
-let currentGameId = null;
-let myRole = null; // p1 или p2
-let rpsChoice = null;
-let diceGuess = null;
-let checkersSel = null;
+let tgUser = null, ws = null;
+let currentGame = null, currentGameType = null, currentGameId = null;
+let myRole = null, rpsChoice = null, diceGuess = null;
+let rematchOpponent = null; // сохраняем соперника для реванша
 
-// ══════════════════════════════════════════════════════
-// ИНИЦИАЛИЗАЦИЯ
-// ══════════════════════════════════════════════════════
+// Рейтинг (хранится локально)
+let ratings = { all:{}, ttt:{}, rps:{}, checkers:{}, dice:{} };
+
 try {
   window.Telegram.WebApp.ready();
   window.Telegram.WebApp.expand();
   tgUser = window.Telegram.WebApp.initDataUnsafe?.user;
 } catch(e) {}
-
-if (!tgUser) {
-  tgUser = { id: Math.floor(Math.random()*100000), first_name: "Игрок" + Math.floor(Math.random()*100) };
-}
-
+if (!tgUser) tgUser = { id: Date.now() % 100000, first_name:"Игрок" + (Date.now()%100) };
 document.getElementById("balance").textContent = tgUser.id % 1000;
 
-// ══════════════════════════════════════════════════════
-// НАВИГАЦИЯ
-// ══════════════════════════════════════════════════════
+// ══ НАВИГАЦИЯ ══════════════════════════════════════
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById("screen-" + id).classList.add("active");
+  document.getElementById("screen-"+id).classList.add("active");
+  window.scrollTo(0,0);
 }
 
 function goHome() {
@@ -351,40 +380,75 @@ function goHome() {
   showScreen("home");
 }
 
-function showTab(tab) {
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-  document.getElementById("nav-" + tab).classList.add("active");
-}
-
 function openLobby(type) {
   currentGameType = type;
-  const names = { ttt:"Крестики-нолики", rps:"Камень-ножницы-бумага", checkers:"Шашки", dice:"Кости" };
-  document.getElementById("lobby-title").textContent = names[type];
+  document.getElementById("lobby-title").textContent = GAME_ICONS[type] + " " + GAME_NAMES[type];
   document.getElementById("join-code").value = "";
   showScreen("lobby");
 }
 
-// ══════════════════════════════════════════════════════
-// WEBSOCKET
-// ══════════════════════════════════════════════════════
+function switchHomeTab(tab) {
+  document.getElementById("home-games").classList.toggle("hidden", tab !== "games");
+  document.getElementById("home-rating").classList.toggle("hidden", tab !== "rating");
+  document.getElementById("tab-games").classList.toggle("active", tab === "games");
+  document.getElementById("tab-rating").classList.toggle("active", tab === "rating");
+  if (tab === "rating") renderRating("all");
+}
+
+function switchRatingTab(tab) {
+  ["all","ttt","rps","checkers","dice"].forEach(t => {
+    document.getElementById("rtab-"+t).classList.toggle("active", t === tab);
+  });
+  renderRating(tab);
+}
+
+function renderRating(tab) {
+  const data = ratings[tab] || {};
+  const sorted = Object.entries(data).sort((a,b) => b[1].wins - a[1].wins).slice(0,10);
+  const medals = ["g","s","b"];
+  const container = document.getElementById("rating-list");
+  if (!sorted.length) {
+    container.innerHTML = '<div class="lb-row" style="justify-content:center;color:#6666aa">Пока нет данных</div>';
+    return;
+  }
+  container.innerHTML = sorted.map(([uid, d], i) => `
+    <div class="lb-row">
+      <div class="lb-rank ${medals[i]||""}">${i+1}</div>
+      <div class="lb-name">${d.name}</div>
+      <div class="lb-score">★ ${d.wins}</div>
+    </div>`).join("");
+}
+
+function recordWin(gameType, uid, name) {
+  ["all", gameType].forEach(t => {
+    if (!ratings[t][uid]) ratings[t][uid] = { name, wins:0, games:0 };
+    ratings[t][uid].wins++;
+    ratings[t][uid].games++;
+  });
+}
+
+function recordGame(gameType, uid, name) {
+  ["all", gameType].forEach(t => {
+    if (!ratings[t][uid]) ratings[t][uid] = { name, wins:0, games:0 };
+    ratings[t][uid].games++;
+  });
+}
+
+// ══ WEBSOCKET ══════════════════════════════════════
 function connectWS(gameId) {
   disconnectWS();
   currentGameId = gameId;
   const uid = String(tgUser.id);
   const uname = encodeURIComponent(tgUser.first_name);
-  ws = new WebSocket(`${SERVER}/ws/${gameId}/${uid}/${uname}`);
-
-  ws.onopen = () => console.log("WS connected");
-  ws.onmessage = (e) => handleServerMsg(JSON.parse(e.data));
-  ws.onclose = () => {
-    if (currentGameId) toast("Соединение прервано");
-  };
-  ws.onerror = () => toast("Ошибка соединения");
+  ws = new WebSocket(`${SERVER_WS}/ws/${gameId}/${uid}/${uname}`);
+  ws.onopen = () => console.log("WS ok");
+  ws.onmessage = e => handleServerMsg(JSON.parse(e.data));
+  ws.onclose = () => { if (currentGameId) toast("⚠️ Соединение прервано"); };
+  ws.onerror = () => toast("❌ Ошибка соединения");
 }
 
 function disconnectWS() {
-  currentGameId = null;
-  currentGame = null;
+  currentGameId = null; currentGame = null;
   if (ws) { ws.close(); ws = null; }
 }
 
@@ -392,11 +456,13 @@ function sendWS(msg) {
   if (ws && ws.readyState === 1) ws.send(JSON.stringify(msg));
 }
 
-// ══════════════════════════════════════════════════════
-// СОЗДАНИЕ / ВХОД В ИГРУ
-// ══════════════════════════════════════════════════════
+// ══ СОЗДАНИЕ / ВХОД ════════════════════════════════
+function makeGameId(type) {
+  return type + "_" + Math.random().toString(36).substr(2,8);
+}
+
 function createGame() {
-  const gameId = currentGameType + "_" + Math.random().toString(36).substr(2, 8);
+  const gameId = makeGameId(currentGameType);
   document.getElementById("waiting-code").textContent = gameId;
   showScreen("waiting");
   connectWS(gameId);
@@ -405,15 +471,34 @@ function createGame() {
 function joinGame() {
   const code = document.getElementById("join-code").value.trim();
   if (!code) { toast("Введи код игры!"); return; }
+  // Проверяем что тип совпадает
+  const codeType = code.split("_")[0];
+  if (codeType !== currentGameType && ["ttt","rps","checkers","dice"].includes(codeType)) {
+    if (!confirm(`Это код для игры "${GAME_NAMES[codeType]}", а не "${GAME_NAMES[currentGameType]}". Всё равно присоединиться?`)) return;
+    currentGameType = codeType;
+  }
   connectWS(code);
-  showScreen("waiting");
   document.getElementById("waiting-code").textContent = code;
+  showScreen("waiting");
 }
 
 function copyCode() {
   const code = document.getElementById("waiting-code").textContent;
-  navigator.clipboard.writeText(code).catch(() => {});
-  toast("Код скопирован: " + code);
+  navigator.clipboard.writeText(code).catch(()=>{});
+  toast("📋 Код скопирован!");
+}
+
+function shareInvite() {
+  const code = document.getElementById("waiting-code").textContent;
+  const gameType = code.split("_")[0];
+  const gameName = GAME_NAMES[gameType] || "игру";
+  const text = `Привет! Давай сыграем в ${gameName}!\nКод игры: ${code}\nОткрой: @${BOT_USERNAME}`;
+  try {
+    window.Telegram.WebApp.switchInlineQuery(code, ["users"]);
+  } catch(e) {
+    navigator.clipboard.writeText(text).catch(()=>{});
+    toast("Текст скопирован — отправь другу!");
+  }
 }
 
 function leaveGame() {
@@ -422,54 +507,82 @@ function leaveGame() {
 }
 
 function surrender() {
-  if (!confirm("Сдаться?")) return;
-  sendWS({ type: "surrender" });
+  if (!confirm("Сдаться и признать поражение?")) return;
+  sendWS({ type:"surrender" });
 }
 
-// ══════════════════════════════════════════════════════
-// ОБРАБОТКА СООБЩЕНИЙ ОТ СЕРВЕРА
-// ══════════════════════════════════════════════════════
+function rematch() {
+  if (!rematchOpponent) { toast("Соперник уже вышел"); goHome(); return; }
+  // Создаём новую игру того же типа
+  const gameId = makeGameId(currentGameType);
+  document.getElementById("waiting-code").textContent = gameId;
+  // Скрываем результат
+  document.getElementById("result-box").classList.add("hidden");
+  showScreen("waiting");
+  connectWS(gameId);
+  // Уведомляем соперника через чат что ждём реванша
+  toast("Ожидаем соперника на реванш...");
+}
+
+// ══ СООБЩЕНИЯ СЕРВЕРА ══════════════════════════════
 function handleServerMsg(msg) {
   if (msg.type === "game_state") {
+    const prev = currentGame;
     currentGame = msg.game;
-    const p1id = String(currentGame.player1.id);
     const myid = String(tgUser.id);
-    myRole = (p1id === myid) ? "p1" : "p2";
+    myRole = String(currentGame.player1.id) === myid ? "p1" : "p2";
 
     if (currentGame.status === "waiting") {
-      showScreen("waiting");
-      return;
+      showScreen("waiting"); return;
     }
-    // Игра началась
-    startGameScreen();
+
+    // Сохраняем соперника для реванша
+    if (currentGame.player2) {
+      const oppId = String(currentGame.player1.id) === myid
+        ? currentGame.player2
+        : currentGame.player1;
+      rematchOpponent = oppId;
+    }
+
+    if (!prev || prev.status === "waiting") {
+      startGameScreen();
+    }
     renderGame();
+
+    if (currentGame.status === "finished" && (!prev || prev.status !== "finished")) {
+      showResultScreen();
+    }
   }
   else if (msg.type === "chat") {
-    addChatMsg(msg.entry.from, msg.entry.text);
+    const myid = String(tgUser.id);
+    const isMe = msg.entry.user_id === myid;
+    // Не добавляем своё — оно уже добавлено при отправке
+    if (!isMe) addChatMsg(msg.entry.from, msg.entry.text, false);
   }
   else if (msg.type === "rps_chose") {
-    if (msg.user_id !== String(tgUser.id)) {
-      toast("Соперник сделал выбор!");
-    }
+    const myid = String(tgUser.id);
+    if (msg.user_id !== myid) toast("👀 Соперник сделал выбор!");
   }
   else if (msg.type === "opponent_left") {
-    toast(msg.message);
-    setTimeout(goHome, 2000);
+    toast("🚪 " + msg.message);
+    rematchOpponent = null;
   }
 }
 
 function startGameScreen() {
-  const names = { ttt:"Крестики-нолики", rps:"Камень-ножницы-бумага", checkers:"Шашки", dice:"Кости" };
-  document.getElementById("active-game-title").textContent = names[currentGame.type];
-  document.querySelectorAll("#game-body [id$='-area']").forEach(a => a.classList.add("hidden"));
-  document.getElementById(currentGame.type + "-area")?.classList.remove("hidden");
+  const t = currentGame.type;
+  document.getElementById("active-game-title").textContent = GAME_ICONS[t] + " " + GAME_NAMES[t];
+  currentGameType = t;
+  ["ttt","rps","checkers","dice"].forEach(g =>
+    document.getElementById(g+"-area").classList.add("hidden"));
+  document.getElementById(t+"-area").classList.remove("hidden");
+  document.getElementById("result-box").classList.add("hidden");
   document.getElementById("chat-messages").innerHTML = "";
+  rpsChoice = null; diceGuess = null;
   showScreen("game");
 }
 
-// ══════════════════════════════════════════════════════
-// РЕНДЕР ИГРЫ
-// ══════════════════════════════════════════════════════
+// ══ РЕНДЕР ═════════════════════════════════════════
 function renderGame() {
   if (!currentGame) return;
   const t = currentGame.type;
@@ -479,393 +592,309 @@ function renderGame() {
   else if (t === "dice") renderDice();
 }
 
-// ── КРЕСТИКИ-НОЛИКИ ──────────────────────────────────
+function showResultScreen() {
+  const g = currentGame;
+  const myid = String(tgUser.id);
+  const box = document.getElementById("result-box");
+  const icon = document.getElementById("result-icon");
+  const text = document.getElementById("result-text");
+  const sub = document.getElementById("result-sub");
+
+  let isWin = false, isDraw = false;
+  if (g.winner === "draw") { isDraw = true; }
+  else if (g.winner === myid) { isWin = true; }
+
+  if (g.surrender && g.winner !== myid) {
+    icon.textContent = "🏳️"; text.textContent = "Ты сдался"; sub.textContent = "Лучше в следующий раз!";
+  } else if (isDraw) {
+    icon.textContent = "🤝"; text.textContent = "Ничья!"; sub.textContent = "Равная игра";
+  } else if (isWin) {
+    icon.textContent = "🏆"; text.textContent = "Победа!"; sub.textContent = "Отличная игра!";
+    recordWin(g.type, myid, tgUser.first_name);
+  } else {
+    icon.textContent = "😢"; text.textContent = "Поражение"; sub.textContent = "Попробуй ещё!";
+    recordGame(g.type, myid, tgUser.first_name);
+  }
+
+  box.classList.remove("hidden");
+  // Скрываем игровую область
+  ["ttt","rps","checkers","dice"].forEach(t =>
+    document.getElementById(t+"-area").classList.add("hidden"));
+}
+
+// ── TTT ────────────────────────────────────────────
 function renderTTT() {
   const g = currentGame;
   const myid = String(tgUser.id);
-  const p1id = String(g.player1.id);
-  const p2id = g.player2 ? String(g.player2.id) : null;
-  const mySymbol = (myid === p1id) ? "X" : "O";
-  const isMyTurn = (g.current === myid) && g.status === "playing";
+  const isMyTurn = g.current === myid && g.status === "playing";
+  const mySymbol = String(g.player1.id) === myid ? "X" : "O";
 
-  let statusText = "";
-  if (g.status === "finished") {
-    if (g.winner === "draw") statusText = "🤝 Ничья!";
-    else if (g.winner === myid) statusText = "🏆 Ты победил!";
-    else statusText = "😢 Ты проиграл";
-    if (g.surrender) statusText += ` (${g.surrender} сдался)`;
-  } else {
-    statusText = isMyTurn ? `<b>Твой ход (${mySymbol === "X" ? "❌" : "⭕"})</b>` : `Ход соперника`;
+  let st = "";
+  if (g.status === "playing") {
+    st = isMyTurn ? `<b>Твой ход (${mySymbol==="X"?"❌":"⭕"})</b>` : "Ход соперника...";
   }
-  document.getElementById("game-status").innerHTML = statusText;
+  document.getElementById("game-status").innerHTML = st;
 
   const board = document.getElementById("ttt-board");
   board.innerHTML = "";
   g.board.forEach((cell, i) => {
     const div = document.createElement("div");
-    div.className = "ttt-cell";
-    div.textContent = cell === "X" ? "❌" : (cell === "O" ? "⭕" : "");
-    if (cell === " " && isMyTurn) div.onclick = () => tttMove(i);
+    div.className = "ttt-cell" + (cell===" " && isMyTurn ? " clickable" : "");
+    div.textContent = cell==="X"?"❌":(cell==="O"?"⭕":"");
+    if (cell===" " && isMyTurn) div.onclick = () => sendWS({type:"ttt_move",cell:i});
     board.appendChild(div);
   });
-
-  if (g.status === "finished") showResult();
 }
 
-function tttMove(i) {
-  sendWS({ type: "ttt_move", cell: i });
-}
-
-// ── КНБ ──────────────────────────────────────────────
+// ── RPS ────────────────────────────────────────────
 function renderRPS() {
   const g = currentGame;
-  const myid = String(tgUser.id);
-
-  if (g.status === "finished") {
-    const p1id = String(g.player1.id);
-    const p2id = g.player2 ? String(g.player2.id) : null;
-    const r = g.result;
-    if (r) {
-      const emoji = { rock:"✊", scissors:"✌️", paper:"✋" };
-      document.getElementById("rps-p1-emoji").textContent = emoji[r.c1] || "?";
-      document.getElementById("rps-p2-emoji").textContent = emoji[r.c2] || "?";
-      let outcome = "", cls = "";
-      if (r.winner === "draw") { outcome = "🤝 Ничья!"; cls = "draw-c"; }
-      else if (r.winner === myid) { outcome = "🏆 Ты победил!"; cls = "win"; }
-      else { outcome = "😢 Ты проиграл"; cls = "lose"; }
-      const el = document.getElementById("rps-outcome");
-      el.textContent = outcome; el.className = "rps-outcome " + cls;
-      document.getElementById("rps-result").classList.remove("hidden");
-    }
-    document.getElementById("game-status").textContent = "Игра завершена";
-    showResult();
-    return;
-  }
+  if (g.status !== "playing") return;
   document.getElementById("game-status").textContent = "Выбери оружие и нажми Готов!";
-  document.getElementById("rps-result").classList.add("hidden");
 }
 
 function rpsChoose(choice) {
   rpsChoice = choice;
-  sendWS({ type: "rps_choose", choice });
-  document.querySelectorAll(".rps-btn").forEach(b => b.classList.remove("selected"));
-  document.getElementById("rps-" + choice).classList.add("selected");
-  toast("Выбрал: " + { rock:"✊ Камень", scissors:"✌️ Ножницы", paper:"✋ Бумага" }[choice]);
+  sendWS({type:"rps_choose",choice});
+  ["rock","scissors","paper"].forEach(k =>
+    document.getElementById("rps-"+k).classList.toggle("selected", k===choice));
+  const names = {rock:"✊ Камень", scissors:"✌️ Ножницы", paper:"✋ Бумага"};
+  toast("Выбрал: " + names[choice]);
 }
 
 function rpsReady() {
   if (!rpsChoice) { toast("Сначала выбери оружие!"); return; }
-  sendWS({ type: "rps_ready" });
-  document.getElementById("rps-ready-btn").textContent = "✅ Ждём соперника...";
-  document.getElementById("rps-ready-btn").disabled = true;
+  sendWS({type:"rps_ready"});
+  const btn = document.getElementById("rps-ready-btn");
+  btn.textContent = "⏳ Ждём соперника...";
+  btn.disabled = true;
+  btn.style.opacity = ".6";
 }
 
-// ── ШАШКИ ────────────────────────────────────────────
-const PIECES = { red:"🔴", red_king:"👑", white:"⚪", white_king:"💎" };
+// ── CHECKERS ───────────────────────────────────────
+const P = {red:"🔴",red_king:"👑",white:"⚪",white_king:"💎"};
 
 function renderCheckers() {
   const g = currentGame;
   const myid = String(tgUser.id);
-  const p1id = String(g.player1.id);
-  const myColor = (myid === p1id) ? "red" : "white";
-  const isMyTurn = (g.current_color === myColor) && g.status === "playing";
+  const myColor = String(g.player1.id)===myid?"red":"white";
+  const isMyTurn = g.current_color===myColor && g.status==="playing";
   const sel = g.selected;
 
-  // Вычисляем доступные ходы
-  let targets = new Set();
-  if (isMyTurn && sel !== null) {
-    const caps = getPieceCaptures(g.board, sel, g.board[sel]);
-    const mustCap = getAllCaptures(g.board, myColor).length > 0;
-    if (caps.length > 0) caps.forEach(([,t]) => targets.add(t));
-    else if (!mustCap) getMoves(g.board, sel, g.board[sel]).forEach(t => targets.add(t));
+  let targets = new Set(), capTargets = new Set();
+  if (isMyTurn && sel!==null && g.board[sel]) {
+    const allCaps = getAllCaps(g.board, myColor);
+    const mustCap = allCaps.length > 0;
+    const pieceCaps = allCaps.filter(([f])=>f===sel);
+    if (pieceCaps.length) pieceCaps.forEach(([,t])=>capTargets.add(t));
+    else if (!mustCap) getMoves(g.board,sel,g.board[sel]).forEach(t=>targets.add(t));
   }
 
-  let statusText = "";
-  if (g.status === "finished") {
-    if (g.winner === myid) statusText = "🏆 Ты победил!";
-    else statusText = "😢 Ты проиграл";
-    if (g.surrender) statusText += ` (${g.surrender} сдался)`;
-  } else {
-    statusText = isMyTurn ? "<b>Твой ход</b>" : "Ход соперника";
-  }
-  document.getElementById("game-status").innerHTML = statusText;
+  const st = g.status==="playing"
+    ? (isMyTurn?"<b>Твой ход</b> — выбери шашку":"Ход соперника...")
+    : "";
+  document.getElementById("game-status").innerHTML = st;
 
   const board = document.getElementById("checkers-board");
   board.innerHTML = "";
-  for (let i = 0; i < 64; i++) {
-    const row = i >> 3, col = i & 7;
+  for (let i=0;i<64;i++) {
+    const r=i>>3,c=i&7;
     const cell = document.createElement("div");
-    cell.className = "ch-cell " + ((row + col) % 2 === 0 ? "ch-light" : "ch-dark");
+    cell.className = "ch-cell "+((r+c)%2===0?"ch-light":"ch-dark");
     const piece = g.board[i];
-    const isSel = (sel === i);
-    const isTarget = targets.has(i);
-    const mustCap = getAllCaptures(g.board, myColor).length > 0;
-
-    if (isSel) cell.classList.add("sel");
-    else if (isTarget && mustCap) cell.classList.add("capture");
-    else if (isTarget) cell.classList.add("target");
-
-    if (piece) {
-      cell.textContent = piece.king
-        ? (piece.color === "red" ? PIECES.red_king : PIECES.white_king)
-        : (piece.color === "red" ? PIECES.red : PIECES.white);
-    }
-
-    if (isMyTurn && g.status === "playing") {
-      cell.onclick = () => checkersClick(i);
-    }
+    if (sel===i) cell.classList.add("sel");
+    else if (capTargets.has(i)) cell.classList.add("capture");
+    else if (targets.has(i)) cell.classList.add("target");
+    if (piece) cell.textContent = piece.king?(piece.color==="red"?P.red_king:P.white_king):(piece.color==="red"?P.red:P.white);
+    if (isMyTurn && g.status==="playing") cell.onclick = ()=>chkClick(i);
     board.appendChild(cell);
   }
-
-  if (g.status === "finished") showResult();
 }
 
-function checkersClick(i) {
+function chkClick(i) {
   const g = currentGame;
   const myid = String(tgUser.id);
-  const p1id = String(g.player1.id);
-  const myColor = (myid === p1id) ? "red" : "white";
+  const myColor = String(g.player1.id)===myid?"red":"white";
   const piece = g.board[i];
   const sel = g.selected;
-
-  if (sel === null) {
-    if (piece && piece.color === myColor) {
-      sendWS({ type: "checkers_move", action: "select", cell: i });
-    }
+  if (sel===null) {
+    if (piece && piece.color===myColor) sendWS({type:"checkers_move",action:"select",cell:i});
+    else toast("Выбери свою шашку!");
   } else {
-    if (piece && piece.color === myColor) {
-      sendWS({ type: "checkers_move", action: "select", cell: i });
-    } else {
-      sendWS({ type: "checkers_move", action: "move", cell: i });
-    }
+    if (piece && piece.color===myColor) sendWS({type:"checkers_move",action:"select",cell:i});
+    else sendWS({type:"checkers_move",action:"move",cell:i});
   }
 }
 
-// Клиентская логика для подсветки
-function getAllCaptures(board, color) {
-  const caps = [];
-  for (let i = 0; i < 64; i++) {
-    const p = board[i];
-    if (p && p.color === color) caps.push(...getPieceCaptures(board, i, p));
-  }
-  return caps;
+function getAllCaps(board, color) {
+  const r=[];
+  for (let i=0;i<64;i++) { const p=board[i]; if(p&&p.color===color) r.push(...getPieceCaps(board,i,p)); }
+  return r;
 }
-
-function getPieceCaptures(board, pos, piece) {
-  if (!piece) return [];
-  const results = [], row = pos >> 3, col = pos & 7;
-  if (piece.king) {
-    for (const [dr, dc] of [[-1,-1],[-1,1],[1,-1],[1,1]]) {
-      let r = row+dr, c = col+dc;
-      while (r>=0&&r<8&&c>=0&&c<8) {
-        const mid = r*8+c;
-        if (board[mid] && board[mid].color !== piece.color) {
-          let r2=r+dr, c2=c+dc;
+function getPieceCaps(board,pos,piece) {
+  if(!piece) return [];
+  const r=[],row=pos>>3,col=pos&7;
+  if(piece.king) {
+    for(const[dr,dc] of[[-1,-1],[-1,1],[1,-1],[1,1]]) {
+      let rr=row+dr,cc=col+dc;
+      while(rr>=0&&rr<8&&cc>=0&&cc<8) {
+        const mid=rr*8+cc;
+        if(board[mid]&&board[mid].color!==piece.color) {
+          let r2=rr+dr,c2=cc+dc;
           while(r2>=0&&r2<8&&c2>=0&&c2<8) {
             const land=r2*8+c2;
-            if (!board[land]) results.push([pos,land,mid]);
-            else break;
-            r2+=dr; c2+=dc;
+            if(!board[land]) r.push([pos,land,mid]); else break;
+            r2+=dr;c2+=dc;
           }
           break;
-        } else if (board[mid]) break;
-        r+=dr; c+=dc;
+        } else if(board[mid]) break;
+        rr+=dr;cc+=dc;
       }
     }
   } else {
-    for (const [dr,dc] of [[-1,-1],[-1,1],[1,-1],[1,1]]) {
+    for(const[dr,dc] of[[-1,-1],[-1,1],[1,-1],[1,1]]) {
       const mr=row+dr,mc=col+dc,tr=row+2*dr,tc=col+2*dc;
-      if (mr>=0&&mr<8&&mc>=0&&mc<8&&tr>=0&&tr<8&&tc>=0&&tc<8) {
-        const mid=mr*8+mc, land=tr*8+tc;
-        if (board[mid]&&board[mid].color!==piece.color&&!board[land])
-          results.push([pos,land,mid]);
+      if(mr>=0&&mr<8&&mc>=0&&mc<8&&tr>=0&&tr<8&&tc>=0&&tc<8) {
+        const mid=mr*8+mc,land=tr*8+tc;
+        if(board[mid]&&board[mid].color!==piece.color&&!board[land]) r.push([pos,land,mid]);
       }
     }
   }
-  return results;
+  return r;
 }
-
-function getMoves(board, pos, piece) {
-  if (!piece) return [];
-  const results = [], row = pos >> 3, col = pos & 7;
-  if (piece.king) {
-    for (const [dr,dc] of [[-1,-1],[-1,1],[1,-1],[1,1]]) {
-      let r=row+dr,c=col+dc;
-      while(r>=0&&r<8&&c>=0&&c<8) {
-        if (!board[r*8+c]) results.push(r*8+c); else break;
-        r+=dr; c+=dc;
-      }
+function getMoves(board,pos,piece) {
+  if(!piece) return [];
+  const r=[],row=pos>>3,col=pos&7;
+  if(piece.king) {
+    for(const[dr,dc] of[[-1,-1],[-1,1],[1,-1],[1,1]]) {
+      let rr=row+dr,cc=col+dc;
+      while(rr>=0&&rr<8&&cc>=0&&cc<8) { if(!board[rr*8+cc]) r.push(rr*8+cc); else break; rr+=dr;cc+=dc; }
     }
   } else {
-    const dirs = piece.color==="red"?[[-1,-1],[-1,1]]:[[1,-1],[1,1]];
-    for (const [dr,dc] of dirs) {
+    const dirs=piece.color==="red"?[[-1,-1],[-1,1]]:[[1,-1],[1,1]];
+    for(const[dr,dc] of dirs) {
       const nr=row+dr,nc=col+dc;
-      if (nr>=0&&nr<8&&nc>=0&&nc<8&&!board[nr*8+nc]) results.push(nr*8+nc);
+      if(nr>=0&&nr<8&&nc>=0&&nc<8&&!board[nr*8+nc]) r.push(nr*8+nc);
     }
   }
-  return results;
+  return r;
 }
 
-// ── КОСТИ ────────────────────────────────────────────
+// ── DICE ───────────────────────────────────────────
 function renderDice() {
   const g = currentGame;
   const myid = String(tgUser.id);
   const p1id = String(g.player1.id);
-  const p2id = g.player2 ? String(g.player2.id) : null;
-  const isP1 = (myid === p1id);
-  const guesserRole = g.guesser_role;
-  const throwerRole = guesserRole === "p1" ? "p2" : "p1";
-  const imGuesser = (isP1 && guesserRole === "p1") || (!isP1 && guesserRole === "p2");
+  const isP1 = myid===p1id;
+  const gr = g.guesser_role;
+  const imGuesser = (isP1&&gr==="p1")||(!isP1&&gr==="p2");
   const imThrower = !imGuesser;
 
-  // Счёт
   document.getElementById("dice-s1").textContent = g.scores.p1;
   document.getElementById("dice-s2").textContent = g.scores.p2;
   document.getElementById("dice-n1").textContent = g.player1.name;
-  document.getElementById("dice-n2").textContent = g.player2 ? g.player2.name : "?";
+  document.getElementById("dice-n2").textContent = g.player2?.name||"?";
+  document.getElementById("dice-phase-title").textContent = `Раунд ${g.round} из 2`;
 
-  if (g.status === "finished") {
-    let statusText = "";
-    if (g.winner === "draw") statusText = "🤝 Ничья!";
-    else if (g.winner === myid) statusText = "🏆 Ты победил!";
-    else statusText = "😢 Ты проиграл";
-    document.getElementById("game-status").textContent = statusText;
-    document.getElementById("dice-guess-area").classList.add("hidden");
-    document.getElementById("dice-throw-area").classList.add("hidden");
-    document.getElementById("dice-wait-area").classList.remove("hidden");
-    document.getElementById("dice-wait-area").innerHTML = `<div style="text-align:center;padding:20px;font-size:18px;">${statusText}</div>`;
-    showResult();
+  const DA = document.getElementById("dice-guess-area");
+  const DT = document.getElementById("dice-throw-area");
+  const DW = document.getElementById("dice-wait-area");
+
+  if (g.status==="finished") {
+    DA.classList.add("hidden"); DT.classList.add("hidden"); DW.classList.remove("hidden");
+    document.getElementById("dice-wait-msg").textContent = "Игра завершена!";
+    document.getElementById("game-status").textContent = "";
     return;
   }
 
-  document.getElementById("dice-phase-title").textContent = `Раунд ${g.round} из 2`;
+  const FACES=["","⚀","⚁","⚂","⚃","⚄","⚅"];
 
-  if (g.phase === "guessing") {
-    document.getElementById("game-status").textContent = imGuesser ? "Загадай число от 2 до 12" : "Соперник загадывает число...";
+  if (g.phase==="guessing") {
+    document.getElementById("game-status").textContent = imGuesser?"Загадай число (2-12)":"Соперник загадывает...";
     if (imGuesser) {
-      document.getElementById("dice-guess-area").classList.remove("hidden");
-      document.getElementById("dice-throw-area").classList.add("hidden");
-      document.getElementById("dice-wait-area").classList.add("hidden");
-      renderDiceNumbers();
+      DA.classList.remove("hidden"); DT.classList.add("hidden"); DW.classList.add("hidden");
+      renderDiceNums();
     } else {
-      document.getElementById("dice-guess-area").classList.add("hidden");
-      document.getElementById("dice-throw-area").classList.add("hidden");
-      document.getElementById("dice-wait-area").classList.remove("hidden");
+      DA.classList.add("hidden"); DT.classList.add("hidden"); DW.classList.remove("hidden");
+      document.getElementById("dice-wait-msg").textContent = "⏳ Соперник загадывает число...";
     }
-  } else if (g.phase === "throwing") {
-    const attempts = g.attempts_left;
-    document.getElementById("game-status").textContent = imThrower
-      ? `Бросай кости! Попыток: ${attempts}`
-      : `Соперник бросает... Попыток: ${attempts}`;
+  } else if (g.phase==="throwing") {
+    const att = g.attempts_left;
+    document.getElementById("game-status").textContent = imThrower?`Бросай кости! Попыток: ${att}`:`Соперник бросает... Попыток: ${att}`;
     if (imThrower) {
-      document.getElementById("dice-guess-area").classList.add("hidden");
-      document.getElementById("dice-throw-area").classList.remove("hidden");
-      document.getElementById("dice-wait-area").classList.add("hidden");
-      document.getElementById("dice-throw-btn").disabled = false;
-      renderDiceLog(g.round_log, g.secret, imGuesser);
+      DA.classList.add("hidden"); DT.classList.remove("hidden"); DW.classList.add("hidden");
+      const btn=document.getElementById("dice-throw-btn");
+      btn.disabled=false; btn.style.opacity="1";
+      // Лог бросков
+      const log=document.getElementById("dice-log");
+      log.innerHTML = g.round_log.map(e=>`
+        <div class="dice-log-row">${FACES[e.d1]}${FACES[e.d2]} = <b>${e.total}</b> ${e.total===g.secret?"✅":"❌"}</div>`).join("");
     } else {
-      document.getElementById("dice-guess-area").classList.add("hidden");
-      document.getElementById("dice-throw-area").classList.add("hidden");
-      document.getElementById("dice-wait-area").classList.remove("hidden");
-      // Если я загадывающий — показываю секрет
-      if (imGuesser && g.secret) {
-        document.getElementById("dice-wait-area").innerHTML =
-          `<div style="text-align:center;padding:20px;color:#9999cc;">🤫 Ты загадал <b style="color:#e0e0ff;font-size:20px">${g.secret}</b><br><br>Соперник бросает кости...</div>`;
+      DA.classList.add("hidden"); DT.classList.add("hidden"); DW.classList.remove("hidden");
+      if (imGuesser&&g.secret) {
+        document.getElementById("dice-wait-msg").innerHTML = `🤫 Ты загадал <b style="color:#e0e0ff;font-size:22px">${g.secret}</b><br><br>Соперник бросает кости...`;
+      } else {
+        document.getElementById("dice-wait-msg").textContent = "⏳ Соперник бросает кости...";
       }
     }
   }
 }
 
-function renderDiceNumbers() {
-  const container = document.getElementById("dice-numbers");
-  container.innerHTML = "";
-  for (let n = 2; n <= 12; n++) {
-    const btn = document.createElement("button");
-    btn.className = "dice-num-btn" + (diceGuess === n ? " selected" : "");
-    btn.textContent = n;
-    btn.onclick = () => {
-      diceGuess = n;
-      renderDiceNumbers();
-    };
-    container.appendChild(btn);
+function renderDiceNums() {
+  const c = document.getElementById("dice-numbers");
+  c.innerHTML = "";
+  for (let n=2;n<=12;n++) {
+    const btn=document.createElement("button");
+    btn.className="dice-num-btn"+(diceGuess===n?" selected":"");
+    btn.textContent=n;
+    btn.onclick=()=>{ diceGuess=n; renderDiceNums(); };
+    c.appendChild(btn);
   }
-}
-
-function renderDiceLog(log, secret, imGuesser) {
-  const DICE_FACES = ["","⚀","⚁","⚂","⚃","⚄","⚅"];
-  const container = document.getElementById("dice-log");
-  container.innerHTML = "";
-  log.forEach(entry => {
-    const div = document.createElement("div");
-    div.className = "dice-log-row";
-    const hit = entry.total === secret;
-    div.textContent = `${DICE_FACES[entry.d1]}${DICE_FACES[entry.d2]} = ${entry.total} ${hit ? "✅" : "❌"}`;
-    container.appendChild(div);
-  });
 }
 
 function diceConfirmGuess() {
   if (!diceGuess) { toast("Выбери число!"); return; }
-  sendWS({ type: "dice_guess", number: diceGuess });
-  diceGuess = null;
+  sendWS({type:"dice_guess",number:diceGuess});
+  diceGuess=null;
 }
 
 function diceThrow() {
-  document.getElementById("dice-throw-btn").disabled = true;
-  sendWS({ type: "dice_throw" });
+  const btn=document.getElementById("dice-throw-btn");
+  btn.disabled=true; btn.style.opacity=".5";
+  sendWS({type:"dice_throw"});
 }
 
-// ══════════════════════════════════════════════════════
-// ЧАТ
-// ══════════════════════════════════════════════════════
+// ══ ЧАТ ════════════════════════════════════════════
 function sendChat() {
-  const input = document.getElementById("chat-input");
-  const text = input.value.trim();
+  const input=document.getElementById("chat-input");
+  const text=input.value.trim();
   if (!text) return;
-  sendWS({ type: "chat", text });
+  // Добавляем своё сообщение сразу (без дублирования)
   addChatMsg(tgUser.first_name, text, true);
-  input.value = "";
+  sendWS({type:"chat",text,user_id:String(tgUser.id)});
+  input.value="";
 }
 
-function addChatMsg(from, text, isMe = false) {
-  const container = document.getElementById("chat-messages");
-  const div = document.createElement("div");
-  div.className = "chat-msg";
-  div.innerHTML = `<span class="chat-from">${from}:</span> ${text}`;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+function addChatMsg(from, text, isMe=false) {
+  const c=document.getElementById("chat-messages");
+  const div=document.createElement("div");
+  div.className="chat-msg";
+  div.innerHTML=`<span class="chat-from ${isMe?"me":""}">${from}:</span> ${text}`;
+  c.appendChild(div);
+  c.scrollTop=c.scrollHeight;
 }
 
-document.getElementById("chat-input").addEventListener("keydown", e => {
-  if (e.key === "Enter") sendChat();
+document.getElementById("chat-input").addEventListener("keydown",e=>{
+  if(e.key==="Enter") sendChat();
 });
 
-// ══════════════════════════════════════════════════════
-// РЕЗУЛЬТАТ
-// ══════════════════════════════════════════════════════
-function showResult() {
-  setTimeout(() => {
-    const g = currentGame;
-    if (!g) return;
-    const myid = String(tgUser.id);
-    let msg = "";
-    if (g.winner === "draw") msg = "🤝 Ничья!";
-    else if (g.winner === myid) msg = "🏆 Ты победил!";
-    else msg = "😢 Ты проиграл";
-    toast(msg);
-  }, 500);
-}
-
-// ══════════════════════════════════════════════════════
-// ТОСТ
-// ══════════════════════════════════════════════════════
-let toastTimer = null;
+// ══ ТОСТ ═══════════════════════════════════════════
+let toastT=null;
 function toast(msg) {
-  const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  if (toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove("show"), 2500);
+  const el=document.getElementById("toast");
+  el.textContent=msg; el.classList.add("show");
+  if(toastT) clearTimeout(toastT);
+  toastT=setTimeout(()=>el.classList.remove("show"),2500);
 }
 </script>
 </body>
